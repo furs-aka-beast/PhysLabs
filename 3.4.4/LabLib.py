@@ -338,29 +338,86 @@ def error_of_exp(x_exp, y_exp, flag=0):
         return er_k, er_b
 
 
-def data_reader(name, contacts, B):
-    data = pd.read_csv(name)
-    delta_ = data[(data.contacts == contacts) & (abs(data['-B, T']) == B)]['U, mV'].tolist()
-    delta = []
-    for i in range(0, len(delta_) - 1):
-        if i % 2 == 0:
-            delta.append(delta_[i] - delta_[i + 1])
-    I_ = data[(data.contacts == contacts) & (abs(data['-B, T']) == B)]['I, mA'].tolist()
-    I = []
-    for i in range(0, len(I_) - 1):
-        if i % 2 == 0:
-            I.append(I_[i])
-    return I, delta
+# def data_reader(name, contacts, B):
+#     data = pd.read_csv(name)
+#     delta_ = data[(data.contacts == contacts) & (abs(data['-B, T']) == B)]['U, mV'].tolist()
+#     delta = []
+#     for i in range(0, len(delta_) - 1):
+#         if i % 2 == 0:
+#             delta.append(delta_[i] - delta_[i + 1])
+#     I_ = data[(data.contacts == contacts) & (abs(data['-B, T']) == B)]['I, mA'].tolist()
+#     I = []
+#     for i in range(0, len(I_) - 1):
+#         if i % 2 == 0:
+#             I.append(I_[i])
+#     return I, delta
 
 
-def calculation(x_exp, y_exp, B, er_B):
-    k = np.polyfit(x_exp, y_exp, 1)
-    er_k, er_b = error_of_exp(x_exp, y_exp, 10)
-    h = 50e-9  # толщина образца
-    epsilon = ((er_k / k[0])**2 + (er_B / B)**2)**0.5
-    delta = epsilon * abs(k[0] * h / B)
-    print('R_H =', k[0] * h / B, '+-', delta)
-    print('epsilon =', epsilon)
+# def calculation(x_exp, y_exp, B, er_B):
+#     k = np.polyfit(x_exp, y_exp, 1)
+#     er_k, er_b = error_of_exp(x_exp, y_exp, 10)
+#     h = 50e-9  # толщина образца
+#     epsilon = ((er_k / k[0])**2 + (er_B / B)**2)**0.5
+#     delta = epsilon * abs(k[0] * h / B)
+#     print('R_H =', k[0] * h / B, '+-', delta)
+#     print('epsilon =', epsilon)
+
+
+data = pd.read_csv("data.csv")
+
+I_ = data['I,mA'].tolist()
+H = []
+I = []
+Nt0 = 1750
+Nt1 = 300
+Ns0 = 825
+Ns1 = 435
+d = 0.07
+ls = 0.8
+dIs = 1.4567
+dxs = 0.096
+D = 0.1 # m
+mu0 = 4 * np.pi * 10e-7
+dB = []
+B0  = 0
+for _ in range(len(I_)):
+    I.append(float(I_[_]) * 0.001)
+    H.append(-I[_] * Nt0 / (np.pi * D))
+
+dx_ = data['dX,cm'].tolist()
+dx = []
+for _ in range(len(dx_)):
+    dx.append(float(dx_[_]) * 0.01)
+for i in range(len(dx)):
+    dB.append(mu0 * Ns0 * (Ns1 / Nt1) * (d/D)**2 * (dIs / ls) * (dx[i] / dxs))
+B_ = []
+for i in range(len(dB)):
+    if i == 0:
+        B_.append(B0)
+    else:
+        B_.append(B_[i - 1] + dB[i])
+# print(I)
+# print(H)
+# print(dx)
+# print(dB)
+# print(len(I))
+# print(len(B))
+# print(len(dB))
+# print(B)
+B1 = max(B_)/2
+B = []
+for i in range(len(dB)):
+    if i == 0:
+        B.append(-B1)
+    else:
+        B.append(B[i - 1] + dB[i])
+plt.figure(figsize=(10, 5))
+plt.scatter(H, B, marker="x", color="red", label='эксперементальные точки')
+plt.xlabel('H', fontsize=14)
+plt.ylabel('B', fontsize=14)
+plt.grid(True)
+plt.legend(loc='best', fontsize=12)
+plt.show()
 
 
 
