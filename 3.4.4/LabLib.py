@@ -376,10 +376,10 @@ d = 0.07
 ls = 0.8
 dIs = 1.4567
 dxs = 0.096
-D = 0.1 # m
-mu0 = 4 * np.pi * 10e-7
+D = 0.1
+mu0 = 4 * np.pi * 10**(-7)
 dB = []
-B0  = 0
+B0 = 0
 for _ in range(len(I_)):
     I.append(float(I_[_]) * 0.001)
     H.append(-I[_] * Nt0 / (np.pi * D))
@@ -396,14 +396,7 @@ for i in range(len(dB)):
         B_.append(B0)
     else:
         B_.append(B_[i - 1] + dB[i])
-# print(I)
-# print(H)
-# print(dx)
-# print(dB)
-# print(len(I))
-# print(len(B))
-# print(len(dB))
-# print(B)
+
 B1 = max(B_)/2
 B = []
 for i in range(len(dB)):
@@ -411,15 +404,59 @@ for i in range(len(dB)):
         B.append(-B1)
     else:
         B.append(B[i - 1] + dB[i])
+print(H)
+print(B)
+
+data_in = pd.read_csv("data_in.csv")
+Ii_ = data_in['I,mA'].tolist()
+Ii = []
+Hi = []
+dBi = []
+for _ in range(len(Ii_)):
+    Ii.append(float(Ii_[_]) * 0.001)
+    Hi.append(Ii[_] * Nt0 / (np.pi * D))
+
+dxi_ = data_in['dX'].tolist()
+dxi = []
+dHi = []
+for _ in range(len(dxi_)):
+    dxi.append(float(dxi_[_]) * 0.01)
+    if _ == 0:
+        dHi.append(Hi[_])
+    else:
+        dHi.append(Hi[_] - H[_ - 1])
+for i in range(len(dxi)):
+    dBi.append(mu0 * Ns0 * (Ns1 / Nt1) * (d/D)**2 * (dIs / ls) * (dxi[i] / dxs))
+mu = []
+
+for i in range(1, len(dBi)):
+    mu.append(dBi[i] / dHi[i] * (1/mu0))
+
+
+print("mu")
+print(mu)
+print(max(mu))
+Bi = []
+for i in range(len(dBi)):
+    if i == 0:
+        Bi.append(B0)
+    else:
+        Bi.append(Bi[i - 1] + dBi[i])
+
+
+
 plt.figure(figsize=(10, 5))
-plt.scatter(H, B, marker="x", color="red", label='эксперементальные точки')
+plt.scatter(H, B, marker="o", s=15,  color="black", label='Петля гистерезиса')
+plt.scatter(Hi, Bi, marker="o", s=15,  color="red", label='Кривая намагничивания')
 plt.xlabel('H', fontsize=14)
 plt.ylabel('B', fontsize=14)
 plt.grid(True)
 plt.legend(loc='best', fontsize=12)
 plt.show()
 
-
-
-
-
+# Bmax = 0.01766
+# Hmax = 8.14 * 1000
+# Ms = Bmax/mu0 - Hmax
+# print(Bmax/mu0 - Hmax)
+# mb = 927 * 10**(-26)
+# print(Ms / mb)
