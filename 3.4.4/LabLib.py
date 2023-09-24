@@ -380,24 +380,33 @@ D = 0.1
 dt = 0.01
 mu0 = 4e-7 * np.pi
 dB = []
+deltaB =[]
 B0 = 0
 for _ in range(len(I_)):
     I.append(float(I_[_]) * 0.001)
     H.append(-I[_] * Nt0 / (np.pi * D))
 
 dx_ = data['dX,cm'].tolist()
+deltax_=data["Deltax"].tolist()
 dx = []
+deltax = []
 for _ in range(len(dx_)):
     dx.append(float(dx_[_]) * 0.01)
+    deltax.append(float(deltax_[_]) * 0.01)
 for i in range(len(dx)):
     dB.append(mu0 * Ns0 * (Ns1 / Nt1) * (d/dt)**2 * (dIs / ls) * (dx[i] / dxs))
+    deltaB.append(mu0 * Ns0 * (Ns1 / Nt1) * (d/dt)**2 * (dIs / ls) * (deltax[i] / dxs))
 B_ = []
+deltaB_ = [0]
 for i in range(len(dB)):
     if i == 0:
         B_.append(B0)
     else:
         B_.append(B_[i - 1] + dB[i])
-
+        deltaB_.append(deltaB_[i - 1] + deltaB[i])
+        #deltaB_.append(deltaB[i])
+# for i in range(len(deltaB_)):
+#     deltaB_[i]=abs(deltaB_[i]-deltaB_[round(len(dB)/4)])
 B1 = max(B_)/2
 B = []
 for i in range(len(dB)):
@@ -413,21 +422,26 @@ Ii_ = data_in['I,mA'].tolist()
 Ii = []
 Hi = []
 dBi = []
+deltaBi =[]
 for _ in range(len(Ii_)):
     Ii.append(float(Ii_[_]) * 0.001)
     Hi.append(Ii[_] * Nt0 / (np.pi * D))
 
 dxi_ = data_in['dX'].tolist()
+deltaXi = data_in["DeltadX"].tolist()
 dxi = []
 dHi = []
 for _ in range(len(dxi_)):
     dxi.append(float(dxi_[_]) * 0.01)
+    deltaXi[_]*=0.01
     if _ == 0:
         dHi.append(Hi[_])
     else:
         dHi.append(Hi[_] - H[_ - 1])
+        deltaXi[_]=deltaXi[_-1]+deltaXi[_]
 for i in range(len(dxi)):
     dBi.append(mu0 * Ns0 * (Ns1 / Nt1) * (d/dt)**2 * (dIs / ls) * (dxi[i] / dxs))
+    deltaBi.append(mu0 * Ns0 * (Ns1 / Nt1) * (d/dt)**2 * (dIs / ls) * (deltaXi[i] / dxs))
 mu = []
 
 for i in range(1, len(dBi)):
@@ -437,6 +451,8 @@ for i in range(1, len(dBi)):
 print("mu")
 print(mu)
 print(max(mu))
+print(dBi[6])
+print(deltaBi[6]-deltaBi[5])
 Bi = []
 for i in range(len(dBi)):
     if i == 0:
@@ -452,8 +468,8 @@ mb = 927e-26
 print(Ms / mb)
 
 plt.figure(figsize=(10, 5))
-plt.scatter(H, B, marker="o", s=15,  color="black", label='Петля гистерезиса')
-plt.scatter(Hi, Bi, marker="o", s=15,  color="red", label='Кривая намагничивания')
+plt.errorbar(H, B, marker="o",  color="black", label='Петля гистерезиса', yerr=deltaB_)
+plt.errorbar(Hi, Bi, marker="o",  color="red", label='Кривая намагничивания', yerr=deltaBi)
 plt.xlabel('H', fontsize=14)
 plt.ylabel('B', fontsize=14)
 plt.grid(True)
