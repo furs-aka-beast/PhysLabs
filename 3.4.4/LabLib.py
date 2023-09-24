@@ -377,7 +377,8 @@ ls = 0.8
 dIs = 1.4567
 dxs = 0.096
 D = 0.1
-mu0 = 4 * np.pi * 10**(-7)
+dt = 0.01
+mu0 = 4e-7 * np.pi
 dB = []
 B0 = 0
 for _ in range(len(I_)):
@@ -389,7 +390,7 @@ dx = []
 for _ in range(len(dx_)):
     dx.append(float(dx_[_]) * 0.01)
 for i in range(len(dx)):
-    dB.append(mu0 * Ns0 * (Ns1 / Nt1) * (d/D)**2 * (dIs / ls) * (dx[i] / dxs))
+    dB.append(mu0 * Ns0 * (Ns1 / Nt1) * (d/dt)**2 * (dIs / ls) * (dx[i] / dxs))
 B_ = []
 for i in range(len(dB)):
     if i == 0:
@@ -426,7 +427,7 @@ for _ in range(len(dxi_)):
     else:
         dHi.append(Hi[_] - H[_ - 1])
 for i in range(len(dxi)):
-    dBi.append(mu0 * Ns0 * (Ns1 / Nt1) * (d/D)**2 * (dIs / ls) * (dxi[i] / dxs))
+    dBi.append(mu0 * Ns0 * (Ns1 / Nt1) * (d/dt)**2 * (dIs / ls) * (dxi[i] / dxs))
 mu = []
 
 for i in range(1, len(dBi)):
@@ -443,7 +444,12 @@ for i in range(len(dBi)):
     else:
         Bi.append(Bi[i - 1] + dBi[i])
 
-
+Bmax = 1.766
+Hmax = 8.14 * 1000
+Ms = Bmax/mu0 - Hmax
+print(Bmax/mu0 - Hmax)
+mb = 927e-26
+print(Ms / mb)
 
 plt.figure(figsize=(10, 5))
 plt.scatter(H, B, marker="o", s=15,  color="black", label='Петля гистерезиса')
@@ -454,9 +460,4 @@ plt.grid(True)
 plt.legend(loc='best', fontsize=12)
 plt.show()
 
-# Bmax = 0.01766
-# Hmax = 8.14 * 1000
-# Ms = Bmax/mu0 - Hmax
-# print(Bmax/mu0 - Hmax)
-# mb = 927 * 10**(-26)
-# print(Ms / mb)
+
