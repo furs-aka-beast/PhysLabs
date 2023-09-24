@@ -1,0 +1,190 @@
+ \documentclass[a4paper,12pt]{article}
+\usepackage[a4paper,top=1.3cm,bottom=2cm,left=1.5cm,right=1.5cm,marginparwidth=0.75cm]{geometry}
+\usepackage{setspace}
+\usepackage{cmap}					
+\usepackage{mathtext} 				
+\usepackage[T2A]{fontenc}			
+\usepackage[utf8]{inputenc}			
+\usepackage[english,russian]{babel}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,urlcolor=blue}
+\usepackage[rgb]{xcolor}
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} 
+\usepackage{icomma} 
+\mathtoolsset{showonlyrefs=true}
+\usepackage{euscript}
+\usepackage{mathrsfs}
+
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+	{\hbox{$\mathsurround=0pt #1$}}{}}
+
+
+\title{\textbf{Определение скорости полета пули при помощи баллистического маятника (1.2.1)}}
+\author{Лавыгин Кирилл}
+\date{2 Декабря 2022}
+
+
+\begin{document}
+	
+	\maketitle
+	
+	\section{Аннотация}
+	
+	В ходе работы будет измерена скорость полета пули при помощи закона сохранения энергии и различных баллистических маятников. Оборудование:
+	Духовое ружьё на штативе, осветитель, оптическая система для измерения отклонений маятника, измерительная линейка, пули и весы для их взвешивания, баллистические маятники.
+	\section{Метод баллистического маятника, совершающего поступательное движение}
+	
+	\subsection{Теоретические сведения}
+	В этой части работы будем использовать установку, изображённую на рисунке ниже. При попадании пули в цилиндр любая его точка движется по окружности известного радиуса, поэтому его смещение с помощью собирающей линзы можно перевести в линейное отклонение на линейке.
+	
+	\begin{figure}[H]\label{pic1}
+		\begin{center}
+			\includegraphics[scale = 0.56]{1.2.1 ustan1}
+			\caption{схема установки для измерения скорости полета пули}
+		\end{center}
+	\end{figure}
+	
+	При контакте пули с цилиндром можно записать ЗСИ:
+	\begin{equation}
+		mu = (M+m)V
+	\end{equation}
+	где $m$ -- масса пули, $u$ -- скорость пули перед ударом, $V$-скорость цилиндра вместе с пулей после удара.
+	\begin{equation}
+		u=\frac{M+m}{m}V \approx \frac{M}{m}V \;\;\;\;\; V^2=2gh \;\;\;\;\; h = L(1-cos \varphi ) = 2L sin^2 \frac{\varphi}{2} \;\;\;\;\;\;\; \varphi \approx \frac{\Delta x}{L} 
+	\end{equation}
+	Тогда скорость пули можно выразить как
+	\begin{equation} \label{vel1}
+		u=\frac{M}{m} \sqrt{\frac{g}{L}} \Delta x
+	\end{equation}
+	
+	Где $\Delta x$ измеряем при помощью оптической системы указанной на Рис.1
+	
+	Наша установка имела параметры: $M = (2900 \pm 5)$ г, и $L = (222.0 \pm 0.5)$ см.
+	
+	
+	Затухания колебаний после выстрела оказались действительно малыми, а влияние холостого выстрела вовсе не было заметно.
+	После каждого выстрела удавалось почти полностью добиться затухания колебаний.
+	
+	Большой неожиданностью стало то, что при выстреле смещалась оптическая система и из-за этого менялось положение нуля шкалы. Из-за этого измерялось максимальное отклонение в одну сторону $x$, и уже после выстрела измерялось начальное положение указателя $x_0$.
+	
+	Так же на нашей установке был установлен хронометром, которым измерялось значение скорости напрямую $U_\text{пр}$.
+	
+	\begin{table}[H]
+		\begin{center}
+			\begin{tabular}{|r|r|r|r|r|r|}
+				\hline
+				$m$, г & $x_0$ ,мм & $x$ ,мм & $\Delta x$, мм & $U$, м/с & $U_\text{пр}$, м/с \\ \hline
+				 0.513 &     -2.75 &   10.00 &          12.75 &    151.6 &              135.8 \\ \hline
+				 0.513 &     -3.75 &    9.00 &          12.75 &    151.6 &              139.3 \\ \hline
+				 0.505 &     -4.75 &    8.00 &          12.75 &    154.0 &              140.5 \\ \hline
+				 0.505 &     -5.75 &    6.75 &          12.50 &    151.0 &              141.7 \\ \hline
+			\end{tabular}
+		
+			\caption{}
+		\end{center}
+	\end{table}
+	
+	Средняя скорость пули \underline{$u_\text{ср} = 152.0$ м/с}, а погрешность будет равна:
+	
+	\begin{equation}
+		\sigma_u^{\text{сист}} =u \sqrt{\varepsilon_M^2 + \varepsilon_m^2 + \varepsilon_{\Delta x}^2 + \left(\frac{\varepsilon_L}{2} \right)^2}  \;\;\;\;\; \sigma_u^{\text{случ}} = \sqrt{ \frac{1}{n(n-1)} \sum_{i=1}^{n}(u_i - u_{\text{ср}})^2} \;\;\;\;\; \sigma_u =\sqrt{\sigma_{\text{сист}}^2 + \sigma_\text{случ}^2} 
+	\end{equation}
+	\begin{equation}
+		\sigma_u^\text{сист}\approx 3 \text{ }\dfrac{\text{м}}{\text{с}} \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \sigma_u^\text{случ}\approx 1.3 \text{ }\dfrac{\text{м}}{\text{с}} \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+		\sigma_u \approx 3 \text{ }\dfrac{\text{м}}{\text{с}}
+	\end{equation}
+	\subsection{Вывод}
+	Окончательно получаем скорость пули равную \underline{$u = (152 \pm 3)\text{, }\dfrac{\text{м}}{\text{с}}$}. Видно, систематическая погрешность сильно больше случайной, что говорит о том, что наш эксперимент поставлен хорошо. Скорости измеренные хронографом сильно отличаются от полученных значений, но это происходит из-за неточности хронографа.
+	
+	
+	\section{Метод крутильного баллистического маятника}
+	
+	\subsection{Теоретические сведения}
+	
+	В этой части работы мы будем использовать крутильный баллистический маятник. Схема установки представлена на картинке ниже.
+	
+	\begin{figure}[h]
+		\begin{center}
+			\includegraphics[scale = 0.66]{1.2.1 ustan2}
+			\caption{схема установки для измерения скорости полета пули с баллистическим маятником}
+		\end{center}
+	\end{figure}
+	
+	Считая удар неупругим, можно записать уравнение
+	$$mur=I \Omega$$
+	$r-$расстояние от линии полёта пули до оси вращения, $I$ -- момент инерции относительно этой оси, $\Omega$ -- угловая скорость маятника сразу после удара.
+	
+	Можно пренебречь затуханием колебаний и потерями энергии и записать ЗСЭ:
+	$$ k \frac{\varphi^2}{2} = I \frac{\Omega^2}{2} $$
+	\noindent где $k$ -- модуль кручения проволоки, $\varphi$ -- максимальный угол поворота маятника, тогда:
+	\begin{equation} \label{vel2}
+		u = \varphi \frac{\sqrt{kI}}{mr} 
+	\end{equation}
+	Измерим расстояние от оси вращения до штатива с линейкой $d = 45.5 \pm 0,1 \text{ см}$, тогда в силу малости колебаний можно найти $\varphi$ как
+	
+	\begin{equation}
+		\label{phi}
+		\varphi \approx \frac{\Delta x}{2d}
+	\end{equation}
+	
+	где $x$ -- смещение изображения нити осветителя на шкале, которое легко можно измерить.
+	
+	Периоды колебаний маятника с грузами и без можно выразить как
+	$$T_1= 2 \pi \sqrt{\frac{I - 2MR^2}{k}} \;\;\;\;\;\; T_2 = 2 \pi \sqrt{\frac{I}{k}}$$
+	Тогда $\sqrt{kI}$ можно найти как:
+	\begin{equation}
+		\sqrt{kI} = \frac{4 \pi M R^2 T_1}{T_1^2 - T_2^2}
+		\label{kl}
+	\end{equation}
+	$R$ -- расстояние от оси вращения до центров грузиков, $M$ - масса грузиков.
+	Для начала запишем данные установки: $ r = 21.7 \pm0.2 \text{ см} \text{, } R = 33.9 \pm0.1 \text{ см} \text{, } M_1 = 713.9\text{ г} \text{, а } M_2 = 714.1 \text{ г} $.
+	
+	Снимем периоды колебаний после выстрела с грузиками и без, чтобы найти $\sqrt{kI}$:
+	
+	\[
+	T_1=\frac{t_1}{5}=\frac{90.4}{5}=18.08 \pm 0.04c \text{ , } T_2=\frac{t_2}{5}=\frac{68.7}{5}=13.74 \pm 0.04c
+	\]
+	
+	С помощью полученных периодов колебаний найдем $\sqrt{kI}$ по формуле \eqref{kl}:
+	
+	$$\sqrt{kI} \approx 0.135 \text{ } \dfrac{\text{кг}\cdot\text{м}^2}{\text{c}} \;\;\;\;\;\; \sigma_{\sqrt{kI}} = \sqrt{kI} \cdot \sqrt{\varepsilon_{T_2^2-T_1^2}^2 + \left(2\varepsilon_{R^2}\right)^2 + \varepsilon_M^2 + \varepsilon_{T^2}^2} \approx 0.002 \text{ } \dfrac{\text{кг}\cdot\text{м}^2}{\text{c}}$$
+	
+	Теперь по формулам \eqref{vel2} и \eqref{phi} определим $\varphi$ и скорость пули. Получаем таблицу:
+	
+	\begin{table}[!h]
+		\begin{center}
+			\begin{tabular}{|r|r|r|r|r|r|r|}
+				\hline
+				 $m$, г & $x_0$, cм & $x$, cм & $\Delta x$, cм &    $\varphi$, рад &    $U$, м/с & $U_\text{пр}$, м/с \\ \hline
+				0.497 &   1.0 &  8.0 & 7.0 & 0.0769 &  96.3 &  105.7 \\ \hline
+				0.513 &   2.2 &  9.1 & 6.9 & 0.0758 &  92.0 &  100.0 \\ \hline
+				0.509 &   0.5 &  8.1 & 7.6 & 0.0835 & 102.1 &  104.3 \\ \hline
+				0.505 &   2.0 &  8.0 & 6.0 & 0.0659 &  81.2 &  102.3 \\ \hline
+			\end{tabular}
+			\caption{Таблица полученных скоростей}
+		\end{center}
+	\end{table}
+	В последнем измерении мы пропустили момент начала движения маятника в обратную сторону, поэтому в обработке оно не учитывается
+	\[
+		U_\text{ср}=96.8 \text{ }\frac{\text{м}}{\text{с}}
+	\]
+	\begin{equation}
+		\sigma_u^{\text{сист}} = u\cdot \sqrt{ \varepsilon_x^2+ \varepsilon_d^2+ \varepsilon_{\sqrt{kI}}^2 + \varepsilon_m^2 + \varepsilon_r^2 } = 1.9 \text{ }\frac{\text{м}}{\text{с}}
+		\;\;\;\;\;\; \sigma_u^{\text{случ}} =  \sqrt{\frac{1}{n(n-1)} \sum_{i=1}^{n}(u_i - \overline{u})^2}=5\text{ }\frac{\text{м}}{\text{с}}  \;\;\;\;\;\;
+	\end{equation}
+	\[\sigma_u = \sqrt{\sigma_{\text{случ}}^2 + \sigma_\text{сист}^2} = 5 \text{ }\frac{\text{м}}{\text{с}}\]
+	
+	\subsection{Вывод}
+	Средняя скорость \underline{$u_\text{ср} = (97 \pm 5)\text{ }\frac{\text{м}}{\text{с}} $}
+	В данном опыте случайная погрешность оказалась существенно больше систематической. Полученные значения схожи с показаниями хронометра
+	\section{Вывод}
+	Были получены значения скоростей пули для двух разных ружей различными методами. Метод поступательного маятника оказался существенно лучше, чем метод крутильного, об этом говорит погрешность полученных значений, соотношение между случайной и систематической погрешностью и общее удобство проведения эксперимента
+	
+\end{document}

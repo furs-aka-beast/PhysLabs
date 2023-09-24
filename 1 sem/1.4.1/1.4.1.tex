@@ -1,0 +1,416 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[a4paper,top=1.3cm,bottom=2cm,left=1.5cm,right=1.5cm,marginparwidth=0.75cm]{geometry}
+\usepackage{setspace}
+\usepackage{cmap}					
+\usepackage{mathtext} 				
+\usepackage[T2A]{fontenc}			
+\usepackage[utf8]{inputenc}			
+\usepackage[english,russian]{babel}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,urlcolor=blue}
+\usepackage[rgb]{xcolor}
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} 
+\usepackage{icomma} 
+\mathtoolsset{showonlyrefs=true}
+\usepackage{euscript}
+\usepackage{mathrsfs}
+\usepackage {indentfirst}
+
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{} %правильный перенос
+	{\hbox{$\mathsurround=0pt #1$}}{}}
+ 
+ \title{Физический маятник. (1.4.1)}
+ \author{Лавыгин Кирилл}
+ \date{30 октября 2022}
+ 
+ 
+ \begin{document}
+ 	
+ 	\maketitle
+ 	
+ 	\section{Аннотация}
+	
+	\textbf{Цели:} на примере измерения периода свободных колебаний физического
+	маятника познакомиться с систематическими и случайными погрешностями, прямыми и косвенными измерениями; проверить справедливость формулы для периода колебаний физического маятника и определить значение ускорения свободного падения, оценить погрешности, а так-же убедиться в справедливости теоремы Гюйгенса об обратимости точек опоры и центра качания маятника
+	
+	В ходе работы использовался метод рядов для более точного измерения времени, определялся центр масс при помощи опоры с острой гранью, так-же была учтена ненулевая масса призмы, на которую крепится стержень. Ожидается подтвердить теоретическую модель колебаний физического маятника и получить значение $g\approx9,8 {\frac {\text{м}}{\text{с}^2} }$
+	
+ 	\textbf{Оборудование:} металлический стержень; опорная призма; торцевые
+ 	ключи; закреплённая на стене консоль; подставка с острой гранью для определения
+ 	цента масс маятника; секундомер; линейки металлические 50 и 100 см;
+ 	штангенциркуль; электронные весы; математический маятник (небольшой груз,
+ 	подвешенный на нитях).
+ 	
+ 	\section{Теоретические сведения}
+ 	
+ 	\begin{wrapfigure}{l}{6cm}
+ 		\includegraphics[width=0.9\linewidth]{ustanovka}
+ 		\caption{Физический маятник}\label{risunok}
+ 	\end{wrapfigure}
+ 	
+ 	 В работе изучается динамика движения физического маятника.
+ 	Физический маятник, используемый в работе, представляет собой однородный стальной стержень массы $m$, длина которого $l>>$  ее диаметра. На стержне закрепляется опорная призма, острое ребро которой является осью качания маятника.
+ 	
+ 	Второй закон Ньютона определяет динамику движения тела точечной массы m. Импульс тела $P=mv$ изменяется во времени $t$ под действием силы $F$:
+ 	\[	F = \frac{dP}{dt} \]
+ 	Если рассмотреть точечную массу, которая движется по окружности радиуса $r$ с угловой скоростью $\omega$, тогда линейная скорость $v = \omega r$, то формулу для силы можно преобразовать:
+ 	\begin{equation}
+ 		[F,r] = [\frac{dP}{dt},r]=M=\frac{dL}{dt}
+ 	\end{equation}
+ 	где $L = J\omega$, где величину $J$ называют \textit{моментом инерции}.
+ 	\begin{equation}
+ 		J = \sum_{i=1} m_i r_i^2
+ 	\end{equation}
+ 	\par Посчитаем момент инерции для данного нам стержня, при вращении вокруг перпендикулярной стержню оси, проходящей через центр масс. Для этого разобьем стержень на отрезки $dr$ и $dm = m\cdot\frac{dr}{l}$ и возьмем интеграл:
+ 	\begin{equation}
+ 		J_c = \int_{-\frac{l}{2}}^{\frac{l}{2}}r^2dm = \int_{-\frac{l}{2}}^{\frac{l}{2}}\frac{mr^2}{l}dm = \frac{ml^2}{12} 
+ 	\end{equation}
+ 	
+ 	
+ 	Призму можно перемещать вдоль стержня, меняя таким образом расстояние $ OC $ от точки опоры маятника до его центра масс. Пусть это расстояние равно $ a $. Тогда по теореме Штейнера момент инерции маятника: ($m$ - масса маятника)
+ 	
+ 	\begin{equation}
+ 		J=\frac{ml^2}{12}+ma^2
+ 	\end{equation}
+ 	
+ 	
+ 	
+ 	Период колебаний получим через аналогию с пружинным маятником, как известно: \begin{equation}
+ 		T_\text{п}=2\pi\sqrt{\frac{m}{k}}
+ 	\end{equation}
+ 	\noindent В нашем случае, роль массы играет \textit{момент инерции тела $J$}, а \textit{жесткость пружины $k$} - коэффициент пропорциональности $mga$. Таким образом приходим к следующей формуле колебаний произвольного физического маятника:
+ 	\begin{equation}
+ 		T=2\pi\sqrt{\frac{J}{mga}}
+ 	\end{equation}
+ 	\noindent После подстановки период колебаний, для стержня длиной $l$ подвешенного на расстоянии $a$ от центра, равен:
+ 	
+ 	\begin{equation}\label{time_a}
+ 		T=2\pi\sqrt{\frac{a^2+\frac{l^2}{12}}{ag}}
+ 	\end{equation}
+ 	
+ 	Таким образом, период малых колебаний не зависит ни от начальной фазы, ни от амплитуды колебаний.
+ 	\medspace
+ 	
+ 	Период колебаний математического маятника определяется формулой (где $l$ -- длина математического маятника):
+ 	\begin{equation}
+ 		T_\text{м}=2\pi\sqrt{\frac{l}{g}},
+ 	\end{equation}
+ 	Поэтому величину
+ 	\begin{equation}\label{prived}
+ 		l_\text{пр}=a+\frac{l^2}{12a}
+ 	\end{equation}
+ 	называют приведённой длиной математического маятника. Поэтому точку $ O' $ (см. рис. \ref{risunok}), отстоящую от точки опоры на расстояние $ l_\text{пр} $, называют центром качания физического маятника. Точка опоры и центр качания маятника обратимы, т.е. при качании маятника вокруг  точки $ O' $ период будет таким же, как и при качании вокруг точки $ O $.
+ 	
+ 	\section {Экспериментальная установка}
+ 	Тонкий стальной стержень, подвешенный на прикрепленной к стене консоли с помощью небольшой призмы, которая опирается на поверхность консоли острым основанием. Призму можно перемещать вдоль стержня, изменяя положение точки подвеса. Период колебаний измеряется с помощью секундомера, расстояния измеряются линейкой и штангенциркулем. Положение центра масс можно определить с помощью балансирования маятника на вспомогательной подставке.
+ 	
+ 	
+ 	
+ 	\subsection{Расчет поправок}
+ 	Если принять во внимание ненулевой вес призмы, то формула для вычисления периода примет такой вид:
+ 	\begin{equation}
+ 		T = 2\pi\sqrt{\frac{J_\text{ст} + J_\text{пр}}{m_\text{ст}ga_\text{ст}-m_\text{пр}ga_\text{пр}}}
+ 	\end{equation}
+ 	Однако призма мала по размеру и массе, поэтому поправка на момент инерции призмы в условиях опыта составляет не более 0,1\% $\Rightarrow$ ей можно пренебречь.
+ 	
+ 	Сравним теперь моменты сил, действующие на призму и стержень при $a = 10$ см:
+ 	\begin{equation}
+ 		\frac{M_\text{пр}}{M_\text{ст}} = \frac{m_\text{пр}ga_\text{пр}}{m_\text{ст}ga_\text{ст}} \approx 10^{-2}
+ 	\end{equation}
+ 	
+ 	В данном случае поправка достигает 1\% $\Rightarrow$ ей пренебречь нельзя. Учесть влияние призмы можно -- исключив $a_\text{пр}$, изменяя положение центра системы. Пусть $X$ -- расстояние от центра масс системы до точки подвеса, тогда:
+ 	\begin{equation}
+ 		X=\frac{m_\text{ст}a_\text{ст}-m_\text{пр}a_\text{пр}}{m_\text{ст} + m_\text{пр}}
+ 	\end{equation}
+ 	
+ 	
+ 	Исключая из двух уравнений $a_\text{пр}$, получаем:
+ 	\begin{equation}\label{period}
+ 		T = 2\pi \sqrt{\frac{\frac{l^2}{12}+a^2}{g\beta X}}; 
+ 		\beta= 1+\frac{m_\text{пр}}{m_\text{ст}}
+ 	\end{equation}	
+ 	\section{Задание}
+ 	\subsection{Оценка погрешностей измерительных приборов и $g$}
+ 	\textbf{Секундомер:} $ \sigma_c = 0,01 \text{ с}$, \textbf{Линейка:} $ \sigma_\text{лин} = 0,1 \text{ см}$
+ 	
+ 	
+ 	Погрешность $g$ зависит от точности измерения длин и периода колебаний. Длины измеряли линейкой. Наименьшее измеренное линейкой расстояние 15 см, меньшие расстояния измерялись штангенциркулем, который способен сделать это с на порядок большей точностью. Абсолютная погрешность линейки: $\sigma_\text{лин} = 0,1 \text{ см}$. Тогда относительная погрешность длин не превышает $\varepsilon_\text{max}\approx0,7\%$  ($\frac{0,1см}{15см}\cdot100\% = 0,7\%$).
+ 	
+ 	\textbf{Вывод:} используемые в работе инструменты позволяют измерять длины с точностью не хуже 0,7\%. Для получения конечного результата с схожей точностью период колебаний следует измерять с той же относительной погрешностью: не хуже, чем $\varepsilon_\text{max}\approx0,7\%$.
+ 	\subsection{Длина стержня и множитель $\beta$}
+ 	
+ 	Длина стержня $l = \left(  100,1 \pm 0,1\right)$ см, масса стержня $m =\left(  880,1 \pm 0,1\right)$ г, масса призмы $m_\text{пр}=\left( 77,0 \pm 0,1\right)$ г. Формула для множителя $\beta$:
+ 	\begin{equation}
+ 		\beta=1+\frac{m_\text{пр}}{m}= 1+\frac{77,0}{880,1}\approx1,08749
+ 	\end{equation}
+ 	\begin{equation}
+ 		\sigma_\text{$\beta$}=\beta\sqrt{\left(\frac{\sigma_\text{пр}}{m_\text{пр}}\right)^2+\left(\frac{\sigma}{m}\right)^2}
+  		=1,08\sqrt{\left(\frac{0,1}{77,0}\right)^2+\left(\frac{0,1}{880,1}\right)^2}\approx0,0014
+ 	\end{equation}
+ 	\par Получаем, что $\beta = \left( 1,0875 \pm 0,0014\right)$ с учетом погрешности. .
+ 	
+ 	\subsection{Центр масс стержня и конструкции}
+ 	Центр масс стержня расположен на расстоянии $b = (50, 0 \pm 0,1) \text{ см}$ от почерневшего конца стрежня. Острие призмы расположено на расстоянии $a = (40 \pm 0,1) \text{ см}$. 
+ 	Сбалансировав маятник \emph{с призмой} на острие вспомогательной установки, измерим положение центра масс конструкции $x_\text{ц} = 36,5\pm0,1\text{ см}$. 
+ 	
+ 	\subsection{Предварительный опыт}
+ 	Установим маятник на консоли и отклоним его на малый угол $\varphi_0 \approx 5^\circ$. Измерим время $n = 20$ полных колебаний и вычислим период колебаний $T = t/n$. Результаты 8 измерений приведем в таблице \ref{tab1}.
+ 	\begin{table}[H]
+ 		\begin{center}
+ 			\begin{tabular}{|l|c|c|c|c|c|c|c|c|}
+ 				\cline{1-9}
+ 				$ \text{№ Опыта}$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+ 				\cline{1-9}
+ 				$t,\text{ с}$ & 31.09 & 31.43 & 31.34 & 31.21 & 31.36 & 31.14 & 31.4 & 31.46 \\
+ 				\cline{1-9}
+ 				$T,\text{ с}$ & 1.5545 & 1.5715 & 1.567 & 1.5605 & 1.568 & 1.557 & 1.57 & 1.573 \\
+ 				\cline{1-9}
+ 			\end{tabular}
+ 		\end{center}
+ 		\caption{Результаты измерения периода колебаний}
+ 		\label{tab1}
+ 	\end{table}
+ 	Получаем $ \sigma_\text{t,случ}=0.14 \text{ c}$, $ T_\text{ср}\approx1.565 \text{ c}$
+ 	
+ 	Предварительное значение ускорения свободного падения посчитаем по формуле
+ 	\begin{equation}\label{golos}
+ 		g = \frac{4\pi^2 (\frac{l^2}{12} + a^2)}{T_\text{ср}^2 \beta x_\text{ц}}
+ 	\end{equation}
+ 	\par Полученное значение равно $g = 9,89$ м/с$^2$. Отличие от табличного значения $g = 9,81$ м/с$^2$ составляет 
+ 	\begin{equation}
+ 		\alpha = \frac{9,89 - 9,81}{9,81}\cdot100\% \approx 0,8\%
+ 	\end{equation}
+ 	\par Легко увидеть, что погрешность измерения времени носит в первую очередь случайный характер:
+ 	\begin{equation}
+ 		\sigma_\text{t} = \sqrt{\sigma_\text{случ}^2+\sigma_\text{с}^2} = \sqrt{0.14^2+0.01^2} \approx0,14\text{ c}.
+ 	\end{equation}
+ 	\par С учетом погрешности период колебаний равен $T = 1,565 \pm 0,007$ с.
+ 	
+ 	\subsection{Оценка количества колебаний}
+ 	\par Оценим количество колебаний маятника, по которому следует измерять его период. Период составляет $T \approx 1,5\text{ c}$. Поскольку $T = t/n$, погрешность периода равна $\sigma_\text{T} = \sigma_\text{t}/n$. Относительная погрешность $\varepsilon_\text{T} = \sigma_\text{t}/nT=$. При требуемой погрешности $\varepsilon = 0.7\%$ получим $n \approx 14$.
+ 	
+ 	\subsection{Измерение периода колебаний для различных значений $\text{a}$}
+ 	
+ 	Изменяем положение призмы, каждый раз измеряя ее положение $a$ относительно центра, положение центра масс системы $x_\text{ц}$ и время $n$ полных колебаний. Результаты приведены в таблице \ref{tab2}. (Сначала был произведен неверный расчет необходимой точности, поэтому первые 3 измерения выполнены для $n=100$, чтоб на самом делеб явно не делает наш эксперимент хуже) $g$ рассчитываем по формуле \ref{golos}.
+ 	
+ 	\begin{table}[H]
+ 		\begin{center}
+ 			\begin{tabular}{|r|r|r|r|r|r|}
+ 				\hline
+ 				$a,\text{ cм}$ & $n$ & $t,\text{с}$ & $T,\text{c}$ & $g, \frac{\text{м}}{\text{с}^2}$ & $x \text{ см}$;\\
+ 				\hline
+ 				40 & 100 & 156.52 & 1.5652 & 9.885464 & 36.5 \\
+ 				\hline
+ 				35 & 100 & 154.08 & 1.5408 & 9.812966 & 32.1 \\
+ 				\hline
+ 				30 & 100 & 152.68 & 1.5268 & 9.896992 & 27.3 \\
+ 				\hline
+ 				25 & 20 & 30.77 & 1.5385 & 9.778069 & 22.9 \\
+ 				\hline
+ 				20 & 20 & 31.64 & 1.582 & 9.788895 & 18.3 \\
+ 				\hline
+ 				15 & 20 & 33.74 & 1.687 & 9.941859 & 13.6 \\
+ 				\hline
+ 				10 & 20 & 38.86 & 1.943 & 9.879967 & 9.1 \\
+ 				\hline
+ 				5 & 20 & 53.77 & 2.6885 & 9.816498 & 4.4 \\
+ 				\hline
+ 				7 & 20 & 45.46 & 2.273 & 10.018267 & 6.2 \\
+ 				\hline
+ 			\end{tabular}
+ 		\end{center}
+ 		\caption{Результаты измерения периода колебаний для различных $\text{a}$}
+ 		\label{tab2}
+ 	\end{table}        
+ 	Можно видеть, что последнее измерение сильно отличается от остальных измеренных величин, поэтому при дальнейшей обработке его не учитываем.
+ 	\subsection{Определение приведенной длины маятника}
+ 	Для $a = 40.0$ см:
+ 	\begin{equation}
+ 		l_\text{прив} = a + \frac{l^2}{12a} = 20 + \frac{100.1^2}{12\cdot 40} \approx 60.9 \text{ см}
+ 	\end{equation}
+ 	Установим соответствующую длину математического маятника(от края прижимающих губок до уентра масс шарика) и измерим $n=20$ таких колебаний:
+ 	\begin{equation}
+ 		t_\text{мат}=31.0\text{ c} , T_\text{мат}=1,55\text{ c}
+ 	\end{equation}
+ 	Период колебаний физического маятника при $a$ = 40 см -- $T$ = 1,565 с $\Rightarrow$ физический маятник длиной $l$, подвешенный 
+ 	в точке $a$, имеет тот же период малых колебаний, что и математический 
+ 	маятник длиной $l_\text{пр} $, так как $ \sigma_\text{$T_\text{мат}$}=\sigma_\text{T}=0.007 $, а значит c учетом погрешностей диапазоны значений периодов пересекаются
+ 	
+ 	\subsection{Центр качания}
+ 	Для $a$ = 40.0 см $l_\text{пр}$ = 60.9 см. Закрепим призму так, чтобы ее острие находилось в центре качания маятника, т.е. на расстоянии $l_\text{пр}$ от предыдущего ее положения. Измерим время $n = 20$ колебаний такого маятника.
+	\[t_\text{цк}=31.27\text{ с}, T_\text{цк}=1.564\text{см}
+	\]
+ 	Как можно видеть, с учетом погрешностей аналогично пункту для математического маятника, периоды этих колебаний так-же равны $\Rightarrow$ теорема Гюйгенса справедлива для $a$=40 см.
+ 	
+ 	\section{Обработка результатов измерений}
+ 	\subsection{Усредненное значение $g$}
+ 	Усредним значение $g$ из таблицы \ref{tab2}
+ 	\[
+ 	g= 9.869 \text{м/с}^2
+ 	\] . 
+ 	
+ 	По формуле \eqref{golos} Найдем систематическую погрешность $g$:
+ 	\begin{equation}
+ 		\sigma_g^\text{сист} = g\cdot \sqrt{\left(\frac{\sigma_{\frac{l^2}{12}+a^2}}{\frac{l^2}{12}+a^2}\right)^2+\left(\frac{\sigma_{T^2 \beta X}}{T^2\beta X}\right)^2}
+ 	\end{equation}
+ 	\begin{equation}
+ 		\sigma_{\frac{l^2}{12}+a^2} = \sqrt{\left(\sigma_{l^2}^2+\sigma_{a^2}^2 \right)}
+ 	\end{equation}
+	\begin{equation}
+ 			\sigma_g^\text{сист} =  g\cdot\sqrt{\frac{\left(\frac{2\sigma_l}{l} \right)^2 + \left(\frac{2\sigma_a}{a}\right)^2}{\left(\frac{l^2}{12}+a^2 \right)^2} + \left(\frac{2\sigma_T}{T}\right)^2+\left(\frac{\sigma_{\beta}}{\beta} \right)^2 + \left(\frac{\sigma_{X}}{X} \right)^2}\approx 0,100 \frac{\text{м}}{c^2}
+ 	\end{equation}
+ 	В то же время $\sigma_g^\text{сист}\approx 0.078 \frac{\text{м}}{c^2}$, тогда:
+ 	\begin{equation}
+ 		\sigma_g^\text{полн} = \sqrt{(\sigma_g^\text{сист})^2+(\sigma_g^\text{случ})^2}\approx 0.123\frac{\text{м}}{c^2}	\end{equation}	
+ 	
+ 	Тогда получаем: $g=\left( 9.87\pm 0.12\right) \frac{\text{м}}{c^2}$.
+ 	
+ 	\subsection{График $T(a)$}
+ 	\begin{figure}[h!]
+ 		\includegraphics[scale=1]{graph}
+ 		\caption{Зависимость $ T $ от $ a $}
+ 		\label{graph}
+ 	\end{figure}
+ 	
+ 	
+ 	Минимум графика (Pисунок \ref{graph}) находится на $a_\text{min} \approx 30$ см, что сходится с рассчетом минимума по формуле \eqref{time_a}: $a_\text{формулы}\approx 28,9$ см
+ 	\subsection{График зависимости $ T^2 x_\text{ц}\beta $ от $ a^2 $ }
+ 	Используя формулу для периода физического маятника \eqref{period} получаем следующее соотношение:
+ 	
+ 	\begin{equation}
+ 		T^2x_\text{ц}\beta=\frac{4\pi^2}{g}a^2+\frac{\pi^2l^2}{3g}.
+ 	\end{equation}
+ 	Отсюда следует, что $ T^2x_\text{ц}\beta \sim  a^2 $, поэтому эту зависимость можно представить в виде
+ 	
+ 	\begin{equation}
+ 		T^2x_\text{ц}\beta=ka^2+b,
+ 	\end{equation}
+ 	где
+ 	\begin{equation}\label{koef}
+ 		k=\frac{4\pi^2}{g}  \text{ и }  b = \frac{\pi^2l^2}{3g}.
+ 	\end{equation}
+ 	
+ 	
+ 	График зависимости $ T^2x_\text{ц}\beta $ от $ a^2 $ представлен на рисунке \ref*{graph_file}.
+ 	
+ 	\begin{figure}[h!]
+ 		\includegraphics[scale=1]{graph_file}
+ 		\caption{Зависимость $ T^2x_\text{ц}\beta $ от $ a^2 $}
+ 		\label{graph_file}
+ 	\end{figure}
+ 	\par
+ 	Погрешности отмечать на графике не имеет смысла, так как из \ref{graph} видно, что они слишком малы для их графического представления.
+ 	Для вычисления коэффициентов $ k $ и $ b $ из \eqref{koef} воспользуемся методом наименьших квадратов:
+ 	
+ 	\begin{equation}
+ 		k=\frac{\langle uv \rangle-\langle v\rangle \langle u\rangle}{\langle v^2\rangle - \langle v\rangle^2}\approx 3.981\cdot10^{-2}\text{ }\frac{\text{с}^2}{\text{см}},
+ 	\end{equation}
+ 	
+ 	\begin{equation}
+ 		b=\langle u \rangle -k\langle v \rangle\approx 34.22\text{ }\text{см}\cdot\text{с}^2,
+ 		v=a^2 , u=T^2x_\text{ц}\beta
+ 	\end{equation}
+ 	
+ 	Случайные погрешности вычисления $ k $ и $ b $ можно найти по следующим формулам:
+ 	
+ 	\begin{equation}
+ 		\sigma_k^\text{сл}=\sqrt{\frac{1}{N-2} \cdot \frac{\langle y^2 \rangle - \langle y \rangle^2}{\langle x^2 \rangle - \langle x \rangle^2} - k^2  } \approx 3.2\cdot10^{-4} \text{ }\frac{\text{с}^2}{\text{см}},
+ 	\end{equation}
+ 	
+ 	\begin{equation}
+ 		\sigma_b^\text{сл}= \sigma_k^\text{сл} \sqrt{\langle x^2 \rangle - \langle x \rangle^2} \approx 0,34 \text{ }\text{см}\cdot\text{с}^2.
+ 	\end{equation}
+ 	
+ 	Систематическая погрешность вычисления коэффициентов определяется следующим соотношением:
+ 	
+ 	\begin{equation}
+ 		\sigma^\text{сист}_k = k\sqrt{\left( \varepsilon_{T^2x_\text{ц}\beta} \right)^2 + \left( \varepsilon_{a^2} \right)^2 } = k\sqrt{\left( 2\varepsilon_{T} \right)^2+ \left( \varepsilon_{x_\text{ц}} \right)^2 + \left( \varepsilon_{\beta} \right)^2 + 2\left( \varepsilon_{a} \right)^2 } \approx 4.7\cdot10^{-4} \text{ }\frac{\text{с}^2}{\text{см}},
+ 	\end{equation}
+ 	
+ 	\begin{equation}
+ 		\sigma^\text{сист}_b = b\sqrt{\left( \varepsilon_{T^2x_\text{ц}\beta} \right)^2 + \left( \varepsilon_{a^2} \right)^2 } =b\sqrt{\left( 2\varepsilon_{T} \right)^2+ \left( \varepsilon_{x_\text{ц}} \right)^2 + \left( \varepsilon_{\beta} \right)^2 + 2\left( \varepsilon_{a} \right)^2 } \approx  0.40 \text{ }\text{см}\cdot\text{с}^2.
+ 	\end{equation}
+ 	
+ 	Тогда полную погрешность вычисления коэффициентов подсчитываем по следующей формуле:
+ 	
+ 	\begin{equation}
+ 		\sigma_k = \sqrt{\left( \sigma_k^\text{сл} \right)^2 + \left( \sigma_k^\text{сист} \right)^2 } \approx 5.7\cdot 10^{-4} \text{ }\frac{\text{с}^2}{\text{см}},
+ 	\end{equation}
+ 	
+ 	\begin{equation}
+ 		\sigma_b = \sqrt{\left( \sigma_b^\text{сл} \right)^2 + \left( \sigma_b^\text{сист} \right)^2 } \approx 0.52 \text{ }\text{см}\cdot\text{с}^2.
+ 	\end{equation}
+ 	
+ 	Таким образом, получаем:
+ 	\begin{itemize}
+ 		\item $ k = \left(3.98\cdot10^{-2}\pm 6\cdot 10^{-4}\right)  \text{ }\frac{\text{с}^2}{\text{см}} $, $ \varepsilon_k = 1.5 \% $
+ 		\item $ b = \left( 34.2\pm 0,5 \right)  \text{ }\text{см}\cdot\text{с}^2 $, $ \varepsilon_b = 1.5 \% $
+ 	\end{itemize}
+ 	
+ 	Используя \eqref{koef}, вычисляем $ g $ через угол наклона прямой:
+ 	
+ 	\begin{equation}
+ 		g_k = \frac{4\pi^2}{k} \approx 9,919  \text{ }\frac{\text{м}}{\text{с}^2},
+ 	\end{equation}
+ 	
+ 	\begin{equation}
+ 		\sigma_{gk} = g\cdot\varepsilon_k \approx 0,15 \text{ }\frac{\text{м}}{\text{с}^2},
+ 	\end{equation}
+ 	
+ 	
+ 	
+ 	Также $ g $ можно вычислить через пересечение графика с осью "y":
+ 	
+ 	\begin{equation}
+ 		g_b = \frac{\pi^2l^2}{3b} \approx 9,638  \text{ }\frac{\text{м}}{\text{с}^2},
+ 	\end{equation}
+ 	
+ 	\begin{equation}
+ 		\sigma_{gb} = g\cdot\varepsilon_b \approx 0,14 \text{ }\frac{\text{м}}{\text{с}^2},
+ 	\end{equation}
+ 	
+ 	
+ 	
+ 	В итоге имеем следующие результаты:
+ 	
+ 	\begin{itemize}
+ 		
+ 		\item \underline{$ g_k = \left( 9,92\pm 0,15\right) \frac{\text{м}}{\text{с}^2} $, $ \varepsilon_{gk} = 1,5\% $}
+ 		
+ 		\item \underline{$ g_b = \left( 9,64\pm 0,14\right) \frac{\text{м}}{\text{с}^2} $, $ \varepsilon_{gb} = 1,5\% $}
+ 		
+ 		
+ 		
+ 	\end{itemize}
+ 	
+ 	
+ 	Сначала заметим, что с точки зрения полученной величины погрешности, метод усреднения $g$ показывает более высокую точность, но метод МНК позволяет во-первых проверить правильность полученной теоретической зависимости путем линеаризации, а во-вторых предоставляет два различных способа расчета $g$. Рассчитав $g$ обоими способами мы получили, что диапазоны $g$ с учетами погрешностей пересекаются в небольшой области, в которой, вероятно и лежит истинное значение $g$:
+ 	\[
+ 	g\approx\frac{g_k+g_b}{2}=9,78\text{ } \frac{\text{м}}{\text{с}^2}, \sigma_g\approx \frac{\sigma_{g_k}}{2}=0.08\text{ } \frac{\text{м}}{\text{с}^2}
+ 	\] 
+ 	
+ 	\section{Вывод}
+ 	В ходе эксперимента мы подтвердили модель физического маятника, проверили формулу эквивалентной длины путем использования математического маятника, проверили Теорему Гюйгенса об обратимости точки оборы и центра качения, рассчитали $g$ двумя различными методами обработки.
+ 	
+ 	В ходе работы мы получили следующие величины:
+ 	\begin{itemize}
+ 		\item $ g_\text{мнк} = \left( 9.78\pm 0.08\right) \frac{\text{м}}{\text{с}^2} $, $ \varepsilon_{gk} = 0.8\% $
+ 		
+ 		\item $ g_\text{уср} = \left( 9,87\pm 0,12\right) \frac{\text{м}}{\text{с}^2} $, $ \varepsilon_{gb} = 1,2\% $
+ 	\end{itemize}
+ 	
+ 
+ 	Чтобы увеличить точность измерений необходимо увеличить число измерений для времени, чтобы уменьшить погрешность из-за реакции экспериментатора, или вовсе осуществлять фиксацию с помощью датчика. Также для увеличения точности стоит измерять a, x с большей точностью, например использовать большой штангенциркуль вместо линейки.
+ 	
+ 	
+ 	
+ 	
+ 	
+ \end{document}

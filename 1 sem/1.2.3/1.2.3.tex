@@ -1,0 +1,359 @@
+ \documentclass[a4paper,12pt]{article}
+\usepackage[a4paper,top=1.3cm,bottom=2cm,left=1.5cm,right=1.5cm,marginparwidth=0.75cm]{geometry}
+\usepackage{setspace}
+\usepackage{cmap}					
+\usepackage{mathtext} 				
+\usepackage[T2A]{fontenc}			
+\usepackage[utf8]{inputenc}			
+\usepackage[english,russian]{babel}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,urlcolor=blue}
+\usepackage[rgb]{xcolor}
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} 
+\usepackage{icomma} 
+\mathtoolsset{showonlyrefs=true}
+\usepackage{euscript}
+\usepackage{mathrsfs}
+
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+	{\hbox{$\mathsurround=0pt #1$}}{}}
+
+
+\title{\textbf{Определение моментов инерции твердых тел с помощью трифилярного подвеса. (1.2.3)}}
+\author{Лавыгин Кирилл}
+\date{10 ноября 2022}
+
+
+\begin{document}
+	
+	\maketitle
+	
+	\section{Аннотация}
+	В ходе работы будет измерен момент инерции различных тел, проверена предложенная теоретическая зависимость. Так-же будет проверенна аддитивность моментов инерции и теорема Гюйгенса-Штейнера. Используемое оборудование: трифилярный подвес; секундомер; счетчик числа колебаний; набор тел, момент инерции которых нужно измерить.
+	
+	\section {Экспериментальная установка}
+	
+	\begin{wrapfigure}{l}{7cm}
+		\includegraphics[width=0.95\linewidth]{1.2.3 ustan.jpg}
+		\caption{Трифилярный подвес}\label{risunok}
+	\end{wrapfigure}
+	
+	Для наших целей удобно использовать устройство, показанное на Рис. \ref{risunok} и называемое трифилярным подвесом. Оно состоит из укрепленной на некоторой высоте неподвижной платформы $P$ и подвешенной к ней на трех симметрично расположенных нитях $AA'$, $BB'$ и $CC'$, вращающейся платформы $P'$. 
+	
+	Чтобы не вызывать дополнительных раскачиваний, лучше поворачивать верхнюю платформу, укрепленную на неподвижной оси. После поворота верхняя платформа остается неподвижной в течение всего процесса колебаний. После того, как нижняя платформа $P'$ оказывается повернутой на угол $\varphi$ относительно верхней платформы $P$, возникает момент сил, стремящийся вернуть нижнюю платформу в положение равновесия, при котором относительный поворот платформ отсутствует. В результате платформа совершает крутильные колебания.
+	
+	\section{Теоретические сведения}
+	
+	\par Инерционность при вращении тела относительно оси определяется моментом инерции тела относительно этой оси. Момент инерции твердого тела относительно неподвижной оси вращения вычисляется по формуле:
+	
+	\begin{equation}
+		I = \int r^2 dm
+	\end{equation}
+	
+	Здесь $r$ -- расстояние элемента массы тела $dm$ от оси вращения. Интегрирование проводится по всей массе тела $m$.
+	
+	Если пренебречь потерями энергии на трение о воздух и крепление нитей, то уравнение сохранения энергии при колебаниях можно записать следующим образом:
+	
+	\begin{equation}\label{moment}
+		\frac{I \dot{\varphi^2}}{2} + mg(z_0-z) = E
+	\end{equation}
+	
+	Здесь $I$ -- момент инерции платформы вместе с исследуемым телом, $m$ -- масса платформы с телом, $\varphi$ -- угол поворота платформы от положения равновесия системы, $z_0$ -- координата по вертикали центра нижней платформы $O'$  при равновесии ($\varphi = 0$), $z$ -- координата той же точки при некотором угле поворота $\varphi$. Первый член в левой части уравнения -- кинетическая энергия вращения, второй член -- потенциальная энергия в поле тяжести, $E$ -- полная энергия системы (платформы с телом).
+	
+	Воспользуемся системой координат $x, y, z$, связанной с верхней платформой, как показано на Рис. \ref{risunok}. Координаты верхнего конца одной из нитей подвеса точки $C$ в этой системе -- $(r, 0, 0)$. Нижний конец данной нити $C'$, находящийся на нижней платформе, при равновесии имеет координаты $(R, 0, z_0)$, а при повороте платформы на угол $\varphi$ эта точка переходит в $C''$ с координатами $(Rcos\varphi, Rsin\varphi, z)$. расстояние между точками $C$ и $C''$ равно длине нити, поэтому, после некоторых преобразований, получаем: 
+	
+	\begin{center}
+		\begin{spacing}{1.6}
+			$ (R\cos\phi - r)^2 + R^2\sin^2\phi + z^2 = L^2 $
+			
+			$ z^2 = L^2 - R^2 - r^2 + 2Rr\cos\phi \approx z^2_{0} - 2Rr(1 - \cos\phi) \approx z^2_{0} - Rr\phi^2 $
+			
+			$ z = \sqrt{z^2_{0} - Rr\phi^2} \approx z_{0} - \frac{Rr\phi^2}{2z_{0}} $
+		\end{spacing}
+	\end{center}
+	
+	Подставляя $z$ в уравнение \eqref{moment}, получаем:
+	
+	\begin{equation}
+		\frac{1}{2}I\dot{\varphi^2} + mg \frac{Rr}{2z_0}\varphi^2 = E
+	\end{equation}
+	
+	Дифференцируя по времени и сокращая на $\dot\varphi$, находим уравнение крутильных колебаний системы:
+	
+	\begin{equation}
+		I\ddot\varphi^2 + mg\frac{Rr}{2z_0}\varphi^2 = 0
+	\end{equation}
+	
+	Производная по времени от $E$ равна нулю, так как потерями на трение, как уже было сказано выше, пренебрегаем.
+	
+	Решение этого уравнения имеет вид:
+	
+	\begin{equation}
+		\varphi = \varphi_0 sin \left(\sqrt{\frac{mgRr}{Iz_0}}t + \theta\right)
+	\end{equation}
+	
+	Здесь амплитуда $\varphi_0$ и фаза $\theta$ колебаний определяются начальными условиями. Период крутильных колебаний нашей системы равен:
+	
+	\begin{equation}
+		T = 2\pi \sqrt{\frac{Iz_0}{mgRr}}
+	\end{equation}
+	
+	Из формулы для периода получаем:
+	
+	\begin{equation}\label{momin}
+		I = \frac{mgRrT^2}{4 \pi^2z_0} = kmT^2
+	\end{equation}
+	\noindent где $k = \frac{gRr}{4\pi^2z_0}$ -- величина, постоянная для данной установки.
+	\section{Задание}
+	\subsection{Проверка установки}
+	При возбуждении крутильных колебаний маятникообразных движений платформы не наблюдается -- устройство функционирует нормально.
+	
+	При выводе формул мы предполагали, что потери энергии, связанные с трением, малы, то есть мало затухание колебаний. Это значит, что теоретические вычисления будут верны, если выполняется условие:
+	
+	\begin{equation}
+		\tau \gg T
+	\end{equation}
+	
+	Проверим данное условие. На нашей установке амплитуда колебаний уменьшилась в $2$ раза за $31$ колебание. Соотношение выполняется -- установка пригодна для проведение эксперимента. Начальное отклоненеи было выбрано $\alpha \approx 15^\circ$.
+	
+	\subsection{Параметры установки и коэффицент $k$}
+
+	\begin{table}[H]
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|}
+				\hline
+				$m \text{, г}$  & $R\text{, мм}$ & $r\text{, мм}$ & $L\text{, см}$ & $z_0\text{, см}$\\
+				\hline
+				1012.5 & 114.5 & 30.5 & 215 & 215\\
+				\hline
+				\hline
+				$\sigma_m \text{, г}$  & $\sigma_R\text{, мм}$ & $\sigma_r\text{, мм}$ & $\sigma_L\text{, см}$ & $\sigma_{z_0}\text{, см}$\\
+				\hline
+				0.5 & 0.5 & 0.3 & 1 & 1\\
+				\hline 
+			\end{tabular}
+			\caption{Парметры установки}
+			\label{param}
+		\end{center}
+	\end{table}
+	
+	\noindent где $\sigma_m$, $\sigma_R$, $\sigma_r$, $\sigma_L$, $\sigma_{z_0}$ -- погрешности соответствующих величин.
+	
+	\bigskip
+	
+	По полученным данным вычислим постоянную для конструкции №3:
+	
+	\begin{equation}
+		k = \frac{gRr}{4\pi^2z_0} \approx 4.040\cdot 10^{-4} \frac{\text{м}^2}{\text{с}^2}
+	\end{equation}
+	
+	Погрешность же $k$ будет равна:
+	
+	\begin{equation}
+		\sigma_k = k \cdot \sqrt{\left( \frac{\sigma_R}{R}\right)^2 + \left( \frac{\sigma_r}{r}\right)^2 + \left( \frac{\sigma_{z_0}}{z_0}\right)^2} \approx 0,05 \cdot 10^{-4} \frac{\text{м}^2}{\text{с}^2}
+	\end{equation}
+	
+	\subsection{Момент инерции платформы}
+	
+	Определить момент инерции платформы можно по формуле \eqref{momin}. Для этого нам необходимо определить период колебаний ненагруженной платформы. Измеряем преиод, получаем:
+	
+	\begin{table}[!h]
+		\begin{center}
+			\begin{tabular}{|r|r|r|r|}
+				\hline
+				 Амплитуда $A, ^\circ$ & Время колебаний         $t, c$ &  Число колебаний $n$ &        Период колебаний $T$ \\
+				 \hline
+				20 & 136.7 & 31 & 4.410 \\
+				\hline
+				15 & 136.2 & 31 & 4.394 \\
+				\hline
+				10 & 131.6 & 30 & 4.387 \\
+				\hline
+				30 & 133.7 & 30 & 4.457 \\
+				\hline
+				28 & 132.5 & 30 & 4.416 \\
+				\hline
+				30 & 132.3 & 30 & 4.411 \\
+				\hline
+				30 & 132.7 & 30 & 4.427 \\
+				\hline			\end{tabular}
+		\end{center}
+	\end{table}
+	
+	Видно, что во время четвертого опыта что-то произошло и показания в нём сильно отличаются от средних, поэтому учитывать его в дальнейшем мы не будем
+	
+	Тогда, средний период колебания платформы будет: \[T_\text{ср} \approx 4,407\text{ с}\]
+	
+	Рассчитаем его погрешность: 
+	
+	\begin{equation}
+		\sigma_T^{\text{сист}} = 0,003\text{ с}
+	\end{equation}
+	\begin{equation}
+		\sigma_T^{\text{случ}} = \sigma_\text{случ}=\sqrt{\frac{1}{  N_\text{изм} \left( N_\text{изм} - 1 \right)}\sum_{i=1}^{N_\text{изм}}\left( T_\text{ср} - T_i \right)^2 } \approx 0,014\text{, c}
+	\end{equation}
+	\begin{equation}
+		\sigma_T = \sqrt{\sigma_\text{случ}^{2} + \sigma_{\text{сист}}^{2}} \approx 0,014\text{, с}
+	\end{equation}
+	Значит $T_\text{ср} = \left(4,407 \pm 0,014\right)\text{, с}$. Теперь мы можем определить момен инерции платформы:
+	
+	\begin{equation}
+		I_\text{пл} = kmT^2 \approx 7.944\cdot 10^{-3}  \text{  кг $\cdot$ $\text{м}^2$}  
+	\end{equation}
+	
+	Найдем погрешность найденного нами момента инерции платформы:
+	
+	\begin{equation}
+		\varepsilon_I = \sqrt{ \left(\frac{\sigma_k}{k}\right)^2 +\left(\frac{\sigma_m}{m}\right)^2 + \left(2\frac{\sigma_T}{T}\right)^2} \approx 0.016
+	\end{equation}
+	\begin{equation}
+		\sigma_{I_\text{пл}} = \varepsilon_I \cdot I_\text{пл} \approx 0,13 \cdot 10^{-3} \text{  кг $\cdot$ $\text{м}^2$ }
+	\end{equation}
+	Получаем, что с помощью данной конструкции мы можем определять момент инерции тела с погрешностью 1.6\%, и $I_\text{пл} = \left(7,944 \pm 0,13\right)\cdot 10^{-3} \text{ кг $\cdot$ $\text{м}^2$}$
+	
+	\subsection{Определение моментов инерции различных тел. Аддитивность моментов инерции}
+	
+	Измерим периоды колебаний платформы с различными телами таким же образом, как и для ненагруженной платформы, $n$ -- число измерений:
+	
+	\begin{table}[!h]
+		\begin{center}
+			\begin{tabular}{|l|r|r|r|r|r|}
+				\hline
+				Вращающиеся тела & $t, c$ & $n$ & Период $T$ & Масса установки $m$, г &  $I\cdot10^3, \text{ кг} \cdot \text{м}^2 $ \\ \hline
+				Только платформа &                         135.95 &                  31 &                4.385 & 1012.5 &  7.87 \\ \hline
+				Обод             &                         136.46 &                  32 &                4.264 & 1596.9 & 11.73 \\ \hline
+				Диск             &                         130.21 &                  33 &                3.946 & 1750.2 & 11.01 \\ \hline
+				Обод+Диск        &                         119.68 &                  30 &                3.989 & 2334.6 & 15.01 \\ \hline
+			\end{tabular}
+			\caption{Моменты инерции платформы с различными телами}
+			\label{momtel}
+		\end{center}
+	\end{table}
+	
+	Для подтверждения аддитивности необходимо показать,что выполняются условия:
+	
+	
+	\begin{equation} \label{plc}
+		I_\text{пл+об} = I_\text{пл} + I_\text{ц}
+	\end{equation}
+	\begin{equation}\label{plk}
+		I_\text{пл+д} = I_\text{пл} + I_\text{д}
+	\end{equation}
+	\begin{equation}
+		I_\text{пл+д+об} = I_\text{пл} + I_\text{ц} + I_\text{д}
+		\label{plck}
+	\end{equation}
+	
+	
+	Из Таблицы \eqref{momtel} и формул \eqref{plc}, \eqref{plk} мы можем найти момент инерции обода и кольца: $I_\text{об} = I_\text{пл+об} - I_\text{пл} = \left(3.9 \pm 0.3\right)\cdot 10^{-3} \text{,  кг $\cdot$ $\text{м}^2$}$, а $I_\text{д} = I_\text{пл+д} - I_\text{пл} = \left(3.1 \pm 0.3\right) \cdot 10^{-3} \text{,  кг $\cdot$ $\text{м}^2$ }$. 
+	
+	Тогда, для доказательства аддитивности, проверим уравнение \eqref{plck}: $I_\text{пл} + I_\text{ц} + I_\text{д}=14.9 \pm 0.6 \cdot 10^{-3} \text{,  кг $\cdot$ $\text{м}^2$ }\approx I_\text{пл+д+об}$.   Оно выполняется, следовательно моменты инерции аддитивны.
+	
+	Теперь сравним полученные нами моменты инерциии для тел, и их теоретические значения:
+	
+	Для диска: $I_\text{д} = \frac{1}{2}m_\text{д}R_\text{д}^2$. Радиус данного цилиндра $R_\text{д} = 85.05\text{ мм}$, тогда $I_\text{д} = 2.7 \cdot 10^{-3}\text{,  кг $\cdot$ $\text{м}^2$ }$, что, к сожалению, выходит за пределы погрешности полученного значения, но в нашем расчете так же присутствует погрешность, так что эти два диапазона пересекаются
+	
+	Для обода же сильно сложнее т.к. оно явно не является тонким: $I_\text{об}=\pi\rho(R_\text{внеш}^4-R_\text{внут}^4)/2$, где $\rho=m/(\pi(R_\text{внеш}^2-R_\text{внут}^2)) $. $m=584.4 \text{ г}$, $R_\text{внеш}=83.35$ мм, $R_\text{внут}=78.65$ мм. Получаем, что $I_\text{к} = 3.8\cdot 10^{-3}\text{  кг $\cdot$ $\text{м}^2$ }$, тут рассчитанное значение уже совпадает с измеренным.
+	
+	\subsection{Зависимость момента инерции системы тел от их расположения. График зависимости $I(h^2)$}
+	
+	\begin{wrapfigure}[10]{r}{0.4\textwidth}
+		\vspace{-3em}
+		\includegraphics[width=0.33\textwidth]{position}
+		\caption{Схема расположения грузов.}
+		\label{ris:position}
+	\end{wrapfigure}
+	
+	Определим зависимость момента инерции системы двух тел от их взаимного расположения. Для этого располагая грузы, как показано на рис. \ref{ris:position}, получим зависимость от расстояния. Затем Используя формулу \ref{momin}, определим зависимость $I(h^2)$.
+	
+	Полученные результаты измерений занесем в таблицу \eqref{tab:period}. Основывыаясь на результатах таблицы, построим график зависимости $ I(h^{2}) $ (Рис. \ref{ris:grafik}).
+	\bigskip\bigskip\bigskip\bigskip
+	\bigskip\bigskip
+	
+	
+	\begin{table}[h]
+		\begin{center}
+		\begin{tabular}{| l | r | r | r | r | r | r | r | r | r |}
+			\hline
+			Число делений & 0 & 2 & 4 & 6 & 8 & 10 & 12 & 14 & 16 \\
+			\cline{1-10}
+			 $h$, см & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+			\cline{1-10}
+			$t$, c & 96.76 & 100.56 & 99.48 & 106.04 & 114.34 & 117.05 & 127.90 & 135.68 & 130.69 \\
+			\cline{1-10}
+			Число колебани й$n$ & 31 & 32 & 31 & 32 & 33 & 32 & 33 & 33 & 30 \\
+			\cline{1-10}
+			Период $T$,c & 3.1213 & 3.1425 & 3.2090 & 3.3138 & 3.4648 & 3.6578 & 3.8758 & 4.1115 & 4.3563 \\
+			\cline{1-10}
+			$I\cdot 10^{3}$ $\text{,  кг $\cdot$ $\text{м}^2$ }$ & 9.56 & 9.69 & 10.11 & 10.78 & 11.78 & 13.13 & 14.74 & 16.59 & 18.62 \\
+			\cline{1-10}
+		\end{tabular}
+			\label{tab:period}
+		\end{center}
+	\end{table}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[width=0.95\textwidth]{graph}
+			\label{ris:grafik}
+		\end{center}
+	\end{figure}
+	
+	По графику понятно, что $I = kh^2 + b$.Тогда $b$ -- момент инерции платформы + диска. Для вычисления коэффициентов $ k $ и $ b $ воспользуемся методом наименьших квадратов:
+	
+	\begin{equation}
+		k=\frac{\langle xy\rangle-\langle x\rangle \langle y\rangle}{\langle x^2\rangle - \langle x\rangle^2}\approx 1.429\text{ кг}
+	\end{equation}
+	
+	\begin{equation}
+		b=\langle y \rangle -k\langle x \rangle\approx 9.54\cdot 10^{-3}\text{  кг $\cdot$ $\text{м}^2$ },
+	\end{equation}
+	где $ x=h^2 $, $ y=I $.
+	
+	Случайные погрешности вычисления $ k $ и $ b $ можно найти по следующим формулам:
+	
+	\begin{equation}
+		\sigma_k^\text{случ}=\frac{1}{\sqrt{N}}\sqrt{\frac{\langle y^2 \rangle - \langle y \rangle^2}{\langle x^2 \rangle - \langle x \rangle^2} - k^2  } \approx 0.007 \text{ кг}
+	\end{equation}
+	
+	\begin{equation}
+		\sigma_b^\text{случ}= \sigma_k^\text{случ} \sqrt{\langle x^2 \rangle - \langle x \rangle^2} \approx 0.02\cdot 10^{-3} \text{,  кг $\cdot$ $\text{м}^2$ }.
+	\end{equation}
+	
+	Систематическая погрешность вычисления коэффициентов определяется следующим соотношением:
+	
+	\begin{equation}
+		\sigma^\text{сист}_k = k\sqrt{\left( \varepsilon_{I} \right)^2 + \left( 2\varepsilon_{h} \right)^2 } \approx 0.02 \text{ кг}
+	\end{equation}
+	\begin{equation}
+		\sigma^\text{сист}_b = b \cdot \varepsilon_I \approx 0.15\cdot 10^{-3} \text{  кг $\cdot$ $\text{м}^2$ }.
+	\end{equation}
+	
+	Тогда полную погрешность вычисления коэффициентов подсчитываем по следующей формуле:
+	
+	\begin{equation}
+		\sigma_k = \sqrt{\left( \sigma_k^\text{случ} \right)^2 + \left( \sigma_k^\text{сист} \right)^2 } \approx 0.02 \text{ кг}
+	\end{equation}
+\begin{equation}
+	\sigma_b = \sqrt{\left( \sigma_b^\text{случ} \right)^2 + \left( \sigma_b^\text{сист} \right)^2 } \approx 0.15 \cdot 10^{-3}\text{  кг $\cdot$ $\text{м}^2$} .
+\end{equation}
+	
+	Теперь можно рассчитать параметры диска из параметров графика. $m=k\approx1.429 \pm 0.02$, что совпадает с измеренным значением $m_\text{изм}=1.417г$. Теперь, зная, что момент инерции диска $I=b\approx (9.54\pm0.15)\cdot 10^{-3}\text{  кг $\cdot$ $\text{м}^2$ }$ определим радиус диска $r=\sqrt{\frac{2b}{k}}\approx0.116$ м. К сожалению у нас в данных не оказалось радиуса диска, но выглядит он достаточно реалистично.
+	
+	\section{Вывод}
+	
+	С помощью трифилярного подвеса можно определять момент инерции с достаточно большой точностью $\varepsilon \approx 1.6\%$. Такая точность обусловлена малой погрешностью измерения времени и условиями, при которых колебания подвеса можно считать слабозатухающими.
+	
+	Мы экспериментально доказали аддитивность моментов инерции с помощью различных тел.
+	
+	Так-же мы проверили, что выполняется теорема Гюйгенса-Штейнера, построив график $I(h^2)$, который оказался с линейным. С помощью этого графика были рассчитаны некоторые параметры данного нам диска, которые с допустимой точностью совпали с измеренными параметрами
+	
+	
+\end{document}

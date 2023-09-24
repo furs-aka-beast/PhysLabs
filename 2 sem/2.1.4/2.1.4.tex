@@ -1,0 +1,275 @@
+ \documentclass[a4paper,12pt]{article}
+\usepackage[a4paper,top=1.3cm,bottom=2cm,left=1.5cm,right=1.5cm,marginparwidth=0.75cm]{geometry}
+\usepackage{setspace}
+\usepackage{cmap}		
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} 			
+ 				
+\usepackage[T2A]{fontenc}			
+\usepackage[utf8]{inputenc}			
+\usepackage[english,russian]{babel}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,urlcolor=blue}
+\usepackage[rgb]{xcolor}
+\usepackage{icomma} 
+\usepackage{euscript}
+
+
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+	{\hbox{$\mathsurround=0pt #1$}}{}}
+
+
+\title{\textbf{Определение теплоёмкости твёрдых тел (2.1.4)}}
+\author{Лавыгин Кирилл}
+\date{\today}
+
+
+\begin{document}
+	
+	\maketitle
+	
+	\section{Аннотация}
+	В ходе работы при помощи калориметра с нагревателем и термометром сопротивления будет измерена теплоемкость калориметра и нескольких образцов.
+	
+	\section{Теоретическая часть}
+	В данной работе происходит измерение теплоемкости твердого тела с использованием следующей принципиальной связи:
+	
+	\begin{equation}\label{eq:first_eq_of_thermal_capacity}
+		C = \frac{\Delta Q}{\Delta T}
+	\end{equation}
+	
+	Определение количества теплоты, переданного телу вызывает некоторые затруднения, так как часть теплоты будет передана окружающей среде через стенки калориметра. В итоге, количество теплоты, переданное телу с учетом теплопотерь через стенки можно определить как:
+
+	
+	\begin{equation}\label{eq:termal_with_heat_lossing}
+		\Delta Q = P\Delta t - \lambda \left( T - T_{\text{к}} \right) \Delta t,
+	\end{equation}
+	где $P$ -- мощность нагревателя, $\lambda$ -- коэффициент теплоотдачи стенок калориметра, $T$ -- температура тела, $T_{\text{к}}$ -- температура окружающего калориметр воздуха, $\Delta t$ -- время, в течении которого происходит нагрев.
+	
+	Из уравнений (\ref{eq:first_eq_of_thermal_capacity}) и (\ref{eq:termal_with_heat_lossing}) Для случаев охлаждения и нагревания получаем:
+	
+	\begin{align}\label{eq:int}
+	\frac{-\mathrm{C}}{\lambda} \ln \frac{T_{\text {cool }}-T_{\mathrm{K}}}{T-T_{\mathrm{K}}}=t &&
+	 T_{\text {heat }}(t)=\frac{P}{\lambda}\left(1-e^{\frac{-\lambda}{C} t}\right)+T_{\mathrm{K}}
+	\end{align}
+	
+	Формулы \eqref{eq:int} являются основными расчетными формулами данной работы.
+	Так-же будет использован дифференциальный метод по следующим формулам (тоже полученным из (\ref{eq:first_eq_of_thermal_capacity}) и (\ref{eq:termal_with_heat_lossing}))
+	\begin{align}
+			\lambda  =\frac{P}{\left(T-T_{\mathrm{K}}\right)\left(1-\frac{A}{B}\right)} &&
+			C  =\frac{P}{A-B} && A=\left(\frac{d T}{d t}\right)_{\text {heat }} &&B=\left(\frac{d T}{d t}\right)_{\text {cool }}
+	\end{align}
+	\begin{align}\label{eq:diff}
+					C=\frac{P}{\left(d T_{\text {heat }} / d t\right)_{T=T_{\mathrm{K}}}} ~ (\text{упрощенный вид для } T=T_{\mathrm{K}})
+	\end{align}
+	
+	Измерение температуры строится на принципе линейной зависимости сопротивления материала от изменения температуры по закону:
+	
+	\begin{align}
+		R_{T} = R_{0} \left( 1 + \alpha \Delta T \right), && 
+		\Delta T(R_T)=\beta R_T + B
+	\end{align}
+	
+	Где $R_{0}$ -- сопротивление термометра при температуре $0^\circ$C, $R_{T}$ -- сопротивление термометра при данной температуре, $\beta$, B -- константы
+	\section{Экспериментальная установка}
+	\begin{wrapfigure}[9]{r}{0.3\textwidth}
+		\vspace{-2.5ex}
+		\begin{center}
+			\includegraphics[scale=0.07]{schem.jpg}
+			\caption{Схема включения нагревателя}
+			\label{fig:schem_of_facility}
+		\end{center}
+	\end{wrapfigure}
+	
+	Установка состоит из калориметра с пенопластовой изоляцией, помещенного в ящик из многослойной клееной фанеры. Внутренние стенки калориметра выполнены из материала с высокой теплопроводностью. Надежность теплового контакта между телом и стенками обеспечивается их формой: они имеют форму усеченных конусов и плотно прилегают друг к другу. Для выталкивания образца служит винт в донышке внутренней стенки калориметра.
+	
+	В стенку калориметра вмонтированы электронагреватель и термометр сопротивления. Схема включения нагревателя изображена на рисунке (\ref{fig:schem_of_facility}). Система реостатов позволяет установить нужную силу тока в цепи нагревателя. По амперметру и вольтметру определяется мощность, выделяемая током в нагревателе. Величина сопротивления термометра нагревателя  измеряется мостом постоянного тока.
+	
+	\begin{figure}[h!]
+		\begin{center}
+			\includegraphics[scale=0.3]{ustfig.jpg}
+			\caption{Устройство калориметра}
+			\label{fig:Ris_of_facility}
+		\end{center}
+	\end{figure}	
+	
+	На рисунке (\ref{fig:Ris_of_facility}) изображено устройство калориметра.
+	\section{Ход работы}
+	Запишем параметры экспериментальной установки:
+	\begin{table}[h!]
+		\centering
+		\begin{tabular}{|c|c|c|}
+			\hline
+			Материал образца: & Алюминий  & Железо    \\ \hline
+			Масса образца, г  &$294.2 \pm 0.1 $ &$815.1 \pm 0.1$ \\ \hline
+		\end{tabular}
+		\caption{Параметры исследуемых образцов}
+		\label{tab:param_of_facility}
+	\end{table}
+	\begin{align*}
+		U_0=27.247\pm0.001\text{ В (напряжение на нагревателе)} && I_0=0.2262\pm 0.0001 \text{ A (ток через нагреватель)}
+	\end{align*}
+	\begin{align*}
+		P=U_0I_0=6.163\pm0.003 \text{ Вт(мощность нагревателя)}\\
+		\end{align*}
+\begin{align*}
+	\beta=14.377798 ~ \text{К/Ом} && B=-233.79486 ~ K
+\end{align*}
+\subsection{Пустой калориметр}
+Сначала охлаждаем калориметр при помощи холодного латунного цилиндра (для того, чтобы калориметр достиг комнатной температуры в установившемся режиме). Вынимаем цилиндр и включаем нагреватель. Затем выключаем нагреватель и некоторое время наблюдаем остывание, чтобы по формулам \eqref{eq:int} определить теплоемкость калориметра $C_\text{к}$
+
+Сразу заметим, что так как написанные уравнения верны только для установившегося режима, то аппроксимацию будем проводить по участку, на котором режим уже точно установился
+
+Построим график в координатах $\left(\ln \frac{T_{\text {cool }}-T_{\mathrm{K}}}{T-T_{\mathrm{K}}}, \mathrm{t}\right)$, где $T_{cool}$ -- температура калориметра при охлаждении, $T$ -- температура в начале процесса, $T_K=24.770 \pm 0.006 ~ ^\circ C$ -- средняя комнатная температура.
+
+При таком построении вклад в систематическую погрешность вносит только погрешность $t_{cool}$, поэтому она очень мала
+\begin{figure}[h!]
+	\centering
+	\includegraphics{cool_none.png}
+	\caption{График охлаждения пустого калориметра}
+\end{figure}
+
+Из графика $\frac{\lambda}{C_K}=(3.70 \pm 0.01) \cdot 10^{-4} ~ 1/c$
+
+Теперь построим график для нагревания в координатах $(T_{heat}, ~ exp(\frac{-\lambda t}{CK}))$
+
+Важно не забыть разместить 0 времени в точке, когда температура калориметра равна комнатной($T_K=24.250 \pm 0.006 ~ ^\circ C$).
+\begin{equation*}
+	\sigma_{P/\lambda}^{\text{сист}}\approx t T_{heat} \sigma_\frac{\lambda}{C_K} / \exp{\frac{-\lambda t}{C_K}} \approx 0.013 ~ K
+\end{equation*}
+\begin{figure}[H]
+	\centering
+	\includegraphics{heat_none.png}
+	\caption{График нагревания пустого калориметра}
+\end{figure}
+\begin{align*}
+	P/\lambda \approx 26.06 ~ K  && \sigma_{P/\lambda}^\text{случ}=0.013 ~ K && \sigma_{P/\lambda}=0.02 ~ K
+c\end{align*}
+Такая большая погрещность обусловлена тем, что через полученную кривую можно провести достаточно широкий пучок прямых, что говорит о плохой точности предложенной млдели
+\begin{align*}
+	\frac{C_K}{P}=\left(\frac{P}{\lambda}\right)^{-1} \left(\frac{\lambda}{C_K}\right)^{-1}=114.0 ~ ^\circ C/K &&
+	\sigma_{\frac{C_K}{P}}=\frac{C_K}{P} \left(\frac{\sigma_{\frac{P}{\lambda}}}{P/\lambda} + \frac{\sigma_{\frac{\lambda}{C_K}}}{\frac{\lambda}{C_K}} \right)=0.2 ~ ^\circ C/K
+\end{align*}
+\begin{align*}
+	C_K=\frac{C_K}{P}P=702.5 ~ \frac{\text{Дж}}{^\circ C}, && \sigma_{C_K}\approx \sigma_\frac{C_K}{P}P=1.4 ~ \frac{\text{Дж}}{^\circ C}, && C_K=702.5 \pm1.4 ~ \frac{\text{Дж}}{^\circ C}
+\end{align*}
+Теплоемкость калориметра таким образом получена. Стоит отметить, что графики в действительности получились отличными от прямых, но в интересующих нас областях они хорошо приближаются прямыми. Основная погрешность вносится как-раз несовпадением характера зависимости с предсказанным.
+\subsection{Алюминиевый конус}
+Проведём опыт,аналогичный первому, но после охлаждения калориметра поместим в него алюминиевый конус теплоемкости $C_A$.
+Построим график в координатах $\left(\ln \frac{T_{\text {cool }}-T_{\mathrm{K}}}{T-T_{\mathrm{K}}}, \mathrm{t}\right)$, где $T_{cool}$ -- температура калориметра при охлаждении, $T$ -- температура в начале процесса, $T_K=25.268 \pm 0.005 ~ ^\circ C$ -- средняя комнатная температура.
+
+При таком построении вклад в систематическую погрешность вносит только погрешность $T_{cool}$, поэтому она очень мала
+\begin{figure}[H]
+	\centering
+	\includegraphics{cool_al.png}
+	\caption{График охлаждения калориметра с алюминием}
+\end{figure}
+
+Из графика $\frac{\lambda}{C_K+C_A}=(2.038 \pm 0.003) \cdot 10^{-4} ~ 1/c$
+
+Теперь построим график для нагревания в координатах $(T_{heat}, ~ exp(\frac{-\lambda t}{C_K+C_A}))$
+
+Важно не забыть разместить 0 времени в точке, когда температура калориметра равна комнатной($T_K=25.030 \pm 0.004 ~ ^\circ C$).
+\begin{equation*}
+	\sigma_{P/\lambda}^{\text{сист}}\approx tT_{heat} \sigma_\frac{\lambda}{C_K+C_A} / \exp{\frac{-\lambda t}{C_K+C_A}} \approx 0.013 ~ K
+\end{equation*}
+\begin{figure}[H]
+	\centering
+	\includegraphics{heat_al.png}
+	\caption{График нагревания калориметра с алюминием}
+\end{figure}
+\begin{align*}
+	P/\lambda \approx 30.64 ~ K  && \sigma_{P/\lambda}^\text{случ}=0.013 ~ K && \sigma_{P/\lambda}=0.02 ~ K
+\end{align*}
+
+\begin{align*}
+	\frac{C_K+C_A}{P}=\left(\frac{P}{\lambda}\right)^{-1} \left(\frac{\lambda}{C_K+C_A}\right)^{-1}=160.1 ~ ^\circ C/K &&
+	\sigma_{\frac{C_K+C_A}{P}}=\frac{C_K+C_A}{P} \left(\frac{\sigma_{\frac{P}{\lambda}}}{P/\lambda} + \frac{\sigma_{\frac{\lambda}{C_K+C_A}}}{\frac{\lambda}{C_K+C_A}} \right)=1.3 ~ ^\circ C/K
+\end{align*}
+\begin{align*}
+	C_K+C_A=\frac{C_K}{P}P=987 ~ \frac{\text{Дж}}{^\circ C}, && \sigma_{C_K+C_A}\approx \sigma_\frac{C_K+C_A}{P}P=8 ~ \frac{\text{Дж}}{^\circ C}, && C_A=285 \pm 9 ~ \frac{\text{Дж}}{^\circ C}
+\end{align*}
+\begin{align*}
+	C_A^\text{уд}=\frac{C_A}{m_A}=989\pm 30 ~ \frac{\text{Дж}}{\text{кг}^\circ C}
+\end{align*}
+Полученное значение весьма реалистично, так как табличное: $C_A^\text{уд табл}=920 ~ \frac{\text{Дж}}{\text{кг}^\circ C}$, но оно может варьироваться для разных марок алюминия
+\subsection{Железный конус}
+Проведём опыт,аналогичный первому, но после охлаждения калориметра поместим в него железный конус теплоемкости $C_F$.
+Построим график в координатах $\left(\ln \frac{T_{\text {cool }}-T_{\mathrm{K}}}{T-T_{\mathrm{K}}}, \mathrm{t}\right)$, где $T_{cool}$ -- температура калориметра при охлаждении, $T$ -- температура в начале процесса, $T_K=25.300 \pm 0.005 ~ ^\circ C$ -- средняя комнатная температура.
+
+При таком построении вклад в систематическую погрешность вносит только погрешность $t_{cool}$, поэтому она очень мала
+\begin{figure}[H]
+	\centering
+	\includegraphics{cool_fe.png}
+	\caption{График охлаждения калориметра с железом}
+\end{figure}
+
+Из графика $\frac{\lambda}{C_K+C_F}=(1.731 \pm 0.002) \cdot 10^{-4} ~ 1/c$
+
+
+Теперь построим график для нагревания в координатах $(T_{heat}, ~ exp(\frac{-\lambda t}{C_K+C_F}))$
+
+Важно не забыть разместить 0 времени в точке, когда температура калориметра равна комнатной($T_K=25.030 \pm 0.004 ~ ^\circ C$).
+\begin{equation*}
+	\sigma_{P/\lambda}^{\text{сист}}\approx tT_{heat} \sigma_\frac{\lambda}{C_K+C_F} / \exp{\frac{-\lambda t}{C_K+C_F}} \approx 0.01 ~ K
+\end{equation*}
+\begin{figure}[H]
+	\centering
+	\includegraphics{heat_fe.png}
+	\caption{График нагревания калориметра с железом}
+\end{figure}
+\begin{align*}
+	P/\lambda \approx 33.06 ~ K  && \sigma_{P/\lambda}^\text{случ}=0.01 ~ K  && \sigma_{P/\lambda}=0.2 ~ K
+\end{align*}
+
+\begin{align*}
+	\frac{C_K+C_F}{P}=\left(\frac{P}{\lambda}\right)^{-1} \left(\frac{\lambda}{C_K+C_F}\right)^{-1}= 174.7~ ^\circ C/K &&
+	\sigma_{\frac{C_K+C_A}{P}}=\frac{C_K+C_A}{P} \left(\frac{\sigma_{\frac{P}{\lambda}}}{P/\lambda} + \frac{\sigma_{\frac{\lambda}{C_K+C_A}}}{\frac{\lambda}{C_K+C_A}} \right)=1.5 ~ ^\circ C/K
+\end{align*}
+\begin{align*}
+	C_K+C_F=\frac{C_K}{P}P=1077 ~ \frac{\text{Дж}}{^\circ C}, && \sigma_{C_K+C_F}\approx \sigma_\frac{C_K+C_F}{P}P=8 ~ \frac{\text{Дж}}{^\circ C}, && C_F=375 \pm 9 ~ \frac{\text{Дж}}{^\circ C}
+\end{align*}
+\begin{align*}
+	C_F^\text{уд}=\frac{C_F}{m_F}=460 \pm 11 ~ \frac{\text{Дж}}{\text{кг}^\circ C}
+\end{align*}
+Результат опять хорошо совпал с табличным $C_F^\text{уд табл}=450 \frac{\text{Дж}}{\text{кг}^\circ C}$. Но опять-же, её значение варьируется для разных сплавов.
+\subsection{Дифференциальный метод}
+Используя уравнение \eqref{eq:diff} определим теплоемкости, построением прямой по 10 точкам в окрестности комнатной температуры
+
+Для пустого:
+\begin{align*}
+	\frac{d T}{d t}=0.0094 \pm 0.0005 ~ \frac{K}{c}, &&
+	C_K=660 ~ \frac{\text{Дж}}{^\circ C}, &&
+	\sigma_{C_K}=C_K\frac{\sigma_{dT/dt}}{\frac{d T}{d t}}=40 ~ \frac{\text{Дж}}{^\circ C}
+\end{align*}
+Для алюминия:
+\begin{align*}
+	\frac{d T}{d t}=0.0086 \pm 0.0005 ~ \frac{K}{c}, &&
+	C_K+C_A=820 ~ \frac{\text{Дж}}{^\circ C}, &&
+	\sigma_{C_K+C_A}=(C_K+C_A)\frac{\sigma_{dT/dt}}{\frac{d T}{d t}}=50 ~ \frac{\text{Дж}}{^\circ C}
+\end{align*}
+Для стали:
+\begin{align*}
+	\frac{d T}{d t}=0.0071 \pm 0.0002 ~ \frac{K}{c}, &&
+	C_K+C_F=870 ~ \frac{\text{Дж}}{^\circ C}, &&
+	\sigma_{C_K+C_F}=(C_K+C_F)\frac{\sigma_{dT/dt}}{\frac{d T}{d t}}=30 ~ \frac{\text{Дж}}{^\circ C}
+\end{align*}
+Итого:
+\begin{align*}
+	C_K=660 \pm 40 ~ \frac{\text{Дж}}{^\circ C}, &&
+	C_A=160 \pm 90 ~ \frac{\text{Дж}}{^\circ C}, &&
+	C_F=210 \pm 70 ~ \frac{\text{Дж}}{^\circ C}
+\end{align*} 
+\subsection{Анализ результатов}
+Интегральный метод дал достаточно точные результаты, которые сошлись с табличными. Предложенные модели действительно являются верными в случае установившегося режима
+
+Дифференциальный дал удовлетворительный, но низкоточный результат для теплоемкости калориметра и неудовлетворительные для теплоемкостей веществ (не смотря на низкую точность). В первую очередь такое расхождение происходит ввиду того, что режим при комнатной температуре ещё не является установившимся, что видно из графиков.
+
+Также интегральный метод сильно уменьшает случайную погрешность измерений, поскольку опирается на все точки, в то время как дифференциальный использует только 10. 
+\end{document}
