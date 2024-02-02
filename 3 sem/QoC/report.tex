@@ -1,0 +1,251 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[a4paper,top=1.3cm,bottom=2cm,left=1.5cm,right=1.5cm,marginparwidth=0.75cm]{geometry}
+\usepackage{setspace}
+\usepackage{cmap}		
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} 			
+ 				
+\usepackage[T2A]{fontenc}			
+\usepackage[utf8]{inputenc}			
+\usepackage[english,russian]{babel}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,urlcolor=blue}
+\usepackage[rgb]{xcolor}
+\usepackage{icomma} 
+\usepackage{euscript}
+
+
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+	{\hbox{$\mathsurround=0pt #1$}}{}}
+
+
+\title{\textbf{Разработка stepped-
+impedance СВЧ фильтра и
+notch-port $\lambda/4$ резонатора}}
+\author{Лавыгин Кирилл}
+\date{\today}
+
+
+\begin{document}
+	
+	\maketitle
+	
+	\section{Введение}
+	При работе с различными сверхпроводящими системами, в частности с джозефсоновскими переходами, характерная частота подаваемых и излучаемых импульсов - гигагерцы. Как и в любых системах возникают задачи по фильтрации различных частот входящего и выходящего сигналов. Использование классических LC фильтров на таких частотах невозможно ввиду наличия паразитной индуктивности у емкости. Из-за этой индуктивности опущенной на землю обычные LC фильтры почти не пропускают высокие частоты.
+	
+	Эти проблемы решают микрополосковые (microstrip) фильтры.
+	
+	В ходе работы будет создана модель stepped-impedance (микрополоскового) фильтра НЧ и notch-port $\lambda/4$ резонатора (изначально его планировалось изготовить для проверки работы фильтра. В общем они тоже довольно часто используются в работе с сверхпроводниками). Данные модели будут проверены при помощи симуляции в среде sonnet.
+	
+	Изначально планировалось изготовить данные структуры, но к сожалению на это не хватило времени
+	\section{Stepped impedance filter}
+	Stepped-impedance фильтр низких частот имеет следующий вид (чередующиеся полоски с высоким и низким импедансами:
+	\begin{figure}[H]
+    \center{\includegraphics[width=\textwidth]{SiF}}
+     
+\end{figure}
+	Справа представлена структура материала в разрезе -- заземленный слой проводника отделенный диэлектриком от металлического слоя с изображенной слева структурой.
+	\subsection{Теоретическая модель}
+	Сразу оговоримся что в данной части мы пренебрегаем всеми потерями. Моделирование покажет, что это приближение работает с хорошей точностью.
+	
+	Короткую проводящую линию без потерь можно представить в следующем виде:
+	\begin{figure}[H]
+    \center{\includegraphics[width=0.8\textwidth]{eqscheme}}
+     
+	\end{figure}
+	Рассмотрим одну полоску фильтра (здесь и в дальнейшем $\gamma=\alpha+i\beta$):
+	$$
+\left[\begin{array}{l}
+V_{1} \\
+I_{1}
+\end{array}\right]=\left[\begin{array}{ll}
+A & B \\
+C & D
+\end{array}\right]\left[\begin{array}{l}
+V_{2} \\
+I_{2}
+\end{array}\right] \quad \begin{array}{ll}
+A=\cos \beta \ell & B=j Z_{0} \sin \beta \ell \\
+C=j Y_{0} \sin \beta \ell & D=\cos \beta \ell
+\end{array}
+$$
+$$
+\left[\begin{array}{l}
+V_{1} \\
+V_{2}
+\end{array}\right]=\left[\begin{array}{ll}
+Z_{11} & Z_{12} \\
+Z_{21} & Z_{22}
+\end{array}\right]\left[\begin{array}{l}
+I_{1} \\
+I_{2}
+\end{array}\right]
+$$
+$$
+\begin{aligned}
+& Z_{11}=Z_{22}=\frac{A}{C}=-j Z_{0} \cot \beta \ell \\
+& Z_{12}=Z_{21}=\frac{1}{C}=-j Z_{0} \csc \beta \ell .
+\end{aligned}
+$$
+$$
+Z_{\text {series }}=Z_{11}-Z_{12}=-j Z_{0}\left(\frac{\cos \beta \ell-1}{\sin \beta \ell}\right)=j Z_{0} \tan \left(\frac{\beta \ell}{2}\right)
+$$
+$$
+\mathrm{Z}_{\text {shunt }}=Z_{12}=-j Z_{0} / \sin \beta l
+$$
+$$
+\begin{aligned}
+\frac{X}{2} =Z_{0} \tan \left(\frac{\beta \ell}{2}\right) &&
+B =\frac{1}{Z_{0}} \sin \beta \ell
+\end{aligned}
+$$
+Теперь воспользуемся тем, что $\beta l<\pi / 4$ :
+	\begin{figure}[H]
+    \center{\includegraphics[width=0.45\textwidth]{hi-lo}}
+     
+	\end{figure}
+Нормализованные величины (их принято использовать для расчета подобного рода цепей):
+$$
+C=B R_{0}, L=X / R_{0} \quad R_{0} \text { - импеданс фильтра }
+$$
+$$\beta \ell=\frac{L R_{0}}{Z_{h}} \quad\text{(inductor)} \quad \beta \ell=\frac{C Z_{\ell}}{R_{0}} \quad\text{ (capacitor)}$$
+ 	\begin{figure}[H]
+    \center{\includegraphics[width=0.65\textwidth]{genvalues.png}}
+    
+    \center{\includegraphics[width=0.5\textwidth]{genvalues2.png}}
+     
+	\end{figure}
+\subsection{Параметры изготовления}
+Для изготовления были выбраны следующие материалы (выбор сделан ввиду их распространенности, так как это обычные печатные платы)
+
+Диэлектрик - текстолит FR4 tg$135$ 1.5мм $\epsilon_{r} \approx 4,58, \tan (\delta) \approx 0.02$
+
+Металлизация - медь 18 мкм, $W_{\min }=500$ мкм, $W_{\max }=10000$ мкм
+
+Для прехода от пластины с диэлектриком к пространству с диэлектриком введем эффективное значение $\epsilon$:
+	\begin{figure}[H]
+    \center{\includegraphics[width=0.7\textwidth]{eps_eff}}
+     
+	\end{figure}
+$$\epsilon_{e}=\frac{\epsilon_{r}+1}{2}+\frac{\epsilon_{r}-1}{2} \frac{1}{\sqrt{1+12 d / W}}$$
+$$Z_{\text {min }}=\frac{120 \pi}{\sqrt{\epsilon_{e}}\left[W_{\text {max }} / d+1.393+0.667 \ln \left(W_{\text {max }} / d+1.444\right)\right]}=20.30 \text{ Ом}$$
+$$
+\begin{align}
+Z_{\text {max }}=\frac{60}{\sqrt{\epsilon_{e}}} \ln \left(\frac{8 d}{W_{\text {min }}}+\frac{W_{\text {min }}}{4 d}\right)=108.7 \text { Ом } &&
+\beta=\frac{2 \pi f}{v_{p}}=\frac{2 \pi f \sqrt{\epsilon_{e}}}{c}
+\end{align}
+$$
+Желаемая частота пропускания: $\omega_{\text {cut-off }}=3 \mathrm{GHz}$. Фильтр будет состоять из 6 полосок потому что это дает достаточно хороший результат при небольших размерах.
+\subsection{Итоговый дизайн}
+	Для создания чертежа была написана программа на python с использованием api klayout которая генерирует чертеж по заданным параметрам материала и фильтра.
+	\begin{figure}[H]
+    \center{\includegraphics[width=\textwidth]{finalfilter}}
+     
+	\end{figure}
+\subsection{Симуляция с учетом потерь в Sonnet}
+	В итоге наша теория дала хороший график S-параметров не смотря на пренебрежение потерями.
+	\begin{figure}[H]
+    \center{\includegraphics[width=\textwidth]{graph}}
+     
+	\end{figure}
+\section{Notch-port $\lambda/4$ резонатор}
+	Notch-port означает что резонатор емкостно связан с копланаром (основной проводящей линией). $\lambda/4$ - его длина
+	
+	Синим на чертеже обозначено via -- металлизированное отверстие в плате, соединяющее верхний слой с нижним (заземленным) 
+	
+		\begin{figure}[H]
+    \center{\includegraphics[width=\textwidth]{resonator1}}
+     
+	\end{figure}
+	\subsection{Добротность}
+	Добротность по определению:
+	$$
+Q \stackrel{\text { def }}{=} 2 \pi \times \frac{\text { energy stored }}{\text { energy dissipated per cycle }}
+$$
+В действительности у нас есть две причины потерь: при передаче энергии в резонатор (capacitive) и в замом резонаторе непосредственно (inernal)
+\begin{figure}[H]
+    \center{\includegraphics[width=0.7\textwidth]{quality1}}
+     
+	\end{figure}
+	Связаны они получаются таким соотношением:
+$$\frac{1}{Q_{r}}=\frac{1}{Q_{c}}+\frac{1}{Q_{i}}$$
+
+Мне была поставлена задача сделать резонатор с FWHM(шириной на полувысоте) порядка 10 МГц при резонансной частоте в 1500 Мгц, тогда желаемая добротность:
+$$
+Q \approx \frac{f_{r}}{\Delta f}=\frac{1500 \mathrm{MHz}}{10 \mathrm{MHz}}=150
+$$
+\begin{figure}[H]
+    \center{\includegraphics[width=0.6\textwidth]{fwhm}}
+     
+	\end{figure}
+
+
+\subsection{Внутренняя добротность}
+Эквивалентная схема и ее импеданс:
+\begin{figure}[H]
+    \center{\includegraphics[width=0.7\textwidth]{eqsheme}}
+     
+	\end{figure}
+	\begin{align*}
+Z_{i n}=\left(\frac{1}{R}+\frac{1}{j \omega L}+j \omega C\right)^{-1} \approx \frac{1}{(1 / R)+2 j \Delta \omega C}, \quad \Delta \omega \ll \omega_{0},  && Q_{i}=\frac{R}{\omega_{0} L}=\omega_{0} R C
+\end{align*}
+А для реальной проводящей линии:
+$$Z_{\text {in }}=Z_{0} \tanh (\alpha+j \beta) \ell \quad ~~~ \beta \ell=\frac{\omega_{0} \ell}{v_{p}}+\frac{\Delta \omega \ell}{v_{p}}=\frac{\pi}{2}+\frac{\pi \Delta \omega}{2 \omega_{0}}$$
+Откуда можно получить параметры эквивалентных элементов:
+$$Z_{i n} \approx \frac{Z_{0}}{\alpha \ell+j \pi \Delta \omega /\left(2 \omega_{0}\right)} \quad R=\frac{Z_{0}}{\alpha \ell} \quad C=\frac{\pi}{4 \omega_{0} Z_{0}} \quad L=\frac{1}{\omega_{0}^{2} C}$$
+Откуда добротность:
+$$
+Q_{i}=\frac{\beta}{2 \alpha}, \text { т.к. } \ell=\pi / 2 \beta \quad \beta=\frac{2 \pi f}{v}=\frac{2 \pi f \sqrt{\epsilon_{e}}}{c}
+$$
+Источников потерь у нас два: в диэлектрике и в проводнике
+$$
+\alpha=\alpha_{c}+\alpha_{d} \quad \alpha_{c}=\sqrt{\frac{\pi f \mu_{0}}{\sigma}} /\left(Z_{0} W\right) \quad \alpha_{d}=\frac{\pi f \epsilon_{r}\left(\epsilon_{e}-1\right) \tan \delta}{c\left(\epsilon_{r}-1\right)}
+$$
+\subsection{Внешняя добротность}
+Для расчета добротности можно представить наш копланар и емкостную связь резонатора как трехпортовую систему к третьему порту которой подключается резонатор.
+\begin{figure}[H]
+    \center{\includegraphics[width=0.4\textwidth]{q2}}
+     
+	\end{figure}
+Тогда S-матрица такой системы имеет следующий вид:
+$$
+\begin{aligned}
+& \delta_{0}=\omega C_{c} Z_{0} \quad \delta_{r}=\omega C_{c} Z_{r} \quad \delta_{0}, \delta_{r} \ll 1 \\
+& S=\left[\begin{array}{lll}
+-j \delta_{0} / 2 & 1-j \delta_{0} / 2 & j \sqrt{\delta_{0} \delta_{r}} \\
+1-j \delta_{0} / 2 & -j \delta_{0} / 2 & j \sqrt{\delta_{0} \delta_{r}} \\
+j \sqrt{\delta_{0} \delta_{r}} & j \sqrt{\delta_{0} \delta_{r}} & 1-2 j \delta_{r}-2 \delta_{r}^{2}-\delta_{r} \delta_{0}
+\end{array}\right]\end{aligned}$$
+
+Откуда добротность:
+$$
+Q_{c}=2 \pi \frac{\text { energy stored in the resonator }}{\text { energy leak from port } 3 \text { to port } 1 \text { and } 2 \text { per cycle }}=\frac{\pi}{2\left|S_{31}\right|^{2}}=\frac{\pi}{2\omega^{2} C_{c}^{2} Z_{0} Z_{r}}
+$$
+Полученный результат не подходит для действительного расчета добротности так как не учитывает потери в диэлектрике, но позволяет понять, от каких параметров она зависит и как.
+\subsection{Расчет для различных подложек}
+Изначально планировалось использование такой-же подложки что и для фильтра, но на ней физически невозможно достичь желаемой добротности из-за большой величины тангенса потерь. (внутренняя добротность получалась уже порядка 30) Чтобы получить желаемую добротность был выбран специализированный СВЧ композит Rogers на основе смолы с тефлоном и керамикой, который обеспечивает меньше потери (и так-же доступен на производстве)
+\begin{figure}[H]
+    \center{\includegraphics[width=\textwidth]{calc}}
+     
+	\end{figure}
+	По итогу была выбрана максимально тонкая линия на подложке rogers для достижения максимальной добротности.
+\subsection{Дизайн}
+	Для создания чертежа была написана программа на python с использованием api klayout которая генерирует чертеж по заданным параметрам геомтрии резонатора.
+	\begin{figure}[H]
+    \center{\includegraphics[width=\textwidth]{res2}}
+     
+	\end{figure}
+\subsection{Симуляция с учетом потерь в Sonnet}
+Так как не было получено точного выражения для внешней добротности, то было сгенреировано и исследовано несколько моделей с различными параметрами ($l$ - длина связи, а $d$ - расстояние от участка связывания до копланара)
+	\begin{figure}[H]
+    \center{\includegraphics[width=\textwidth]{ressim}}
+     
+	\end{figure}
+	В итогу получилось достичь желаемых значений, притом основной вклад в потери вносит внутренняя добротнойсть, которая определяется свойствами подложки, поэтому получить больше на нашей подложке мы не сможем 
+\end{document}

@@ -1,0 +1,388 @@
+\documentclass[a4paper,12pt]{article} % добавить leqno в [] для нумерации слева
+\usepackage[a4paper,top=1.3cm,bottom=2cm,left=1.5cm,right=1.5cm,marginparwidth=0.75cm]{geometry}
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в фомулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+\usepackage{float}
+\usepackage{graphicx}
+
+\usepackage{wrapfig}
+\usepackage{tabularx}
+
+\usepackage{hyperref}
+\usepackage[rgb]{xcolor}
+\hypersetup{
+colorlinks=true,urlcolor=blue
+}
+\usepackage[arrowdel]{physics}
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+% Номера формул
+\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+
+\begin{document}
+
+\begin{titlepage}
+	\begin{center}
+		{\large МОСКОВСКИЙ ФИЗИКО-ТЕХНИЧЕСКИЙ ИНСТИТУТ (НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ)}
+	\end{center}
+	\begin{center}
+		{\large Физтех-школа физики и исследований им. Ландау}
+	\end{center}
+	
+	
+	\vspace{4.5cm}
+	{\huge
+		\begin{center}
+			{\bf Лабораторная работа 3.7.1}\\
+			Скин-эффект в полом цилиндре
+		\end{center}
+	}
+	\vspace{2cm}
+	\begin{flushright}
+		{\LARGE Выполнили:\\ Мельников Антон \\
+                                 Лавыгин Кирилл\\
+			\vspace{0.2cm}
+			Б02-213}
+	\end{flushright}
+	\vspace{8cm}
+	\begin{center}
+		Долгопрудный 2023
+	\end{center}
+\end{titlepage}
+
+\section{Аннотация:}
+В ходе работы будет исследовано проникновение магнитного поля в полый цилиндр, измерена его проводимость различными способами, основанными на этом эффекте. 
+\section{Теоретическая часть}
+\subsection{Скин-эффект для полупрастранства}
+\vspace{1cm}
+\begin{wrapfigure}{l}{0.3\textwidth}
+  \begin{center}
+    \includegraphics[width=0.28\textwidth]{poluprostranstvo}
+  \end{center}
+  \caption{Скин-эффект в полупространстве}\label{fig:poluprostranstvo}
+\end{wrapfigure}
+
+Рассмотрим квазистационарное поле внутри проводящей среды в простейшем плоском случае.
+Пусть вектор $\vb*{E}$ направлен всюду вдоль оси $y$ (рис.\ref{fig:poluprostranstvo}) 
+и зависит только от координаты $x$, т. е. ${E_x} = {E_z} \equiv 0$, $E_y=E_y(x,t)$.
+В квазистационарном приближении 
+\begin{align}
+    \grad \times \vb*{H} = \sigma \vb*{E}
+\end{align}
+Берем ротор обоих частей
+\begin{align}
+    \grad \times (\grad \times \vb*{H}) = \grad(\grad \cdot \vb*{H}) - \grad^2\vb*{H} = \sigma \grad \times \vb*{E}
+\end{align}
+Испоьзуя ур-е Максвелла для ротора $\vb*{E}$ и для дивергенции $\vb*{H}$ получаем
+\begin{align}
+    \grad^2 \vb*{H} = \sigma\mu\mu_0\frac{\partial\vb*{H}}{\partial t} 
+                      + \grad(\grad \cdot \vb*{H}) = \sigma\mu\mu_0\frac{\partial\vb*{H}}{\partial t} 
+    \label{eq:laplacian_H}
+\end{align}
+Берем ротор еще раз
+\begin{align}
+    \grad \times (\grad^2\vb*{H}) = \grad^2 (\grad \times \vb*{H}) =
+    \sigma\mu\mu_0 \frac{\partial (\grad \times \vb*{H})}{\partial t}
+\end{align}
+Осталось подставить первое ур-е, и воспользоватся уравнением Максвелла
+\begin{align}\label{eq:diffusion}
+    \grad^2\vb*{E}=\sigma\mu\mu_0 \frac{\partial \vb*{E}}{\partial t}
+\end{align}
+
+Подставляем в \eqref{eq:diffusion} наше электрическое поле $E_y=E_y(x,t)$
+\begin{align}
+    \frac{\partial^2 E_y}{\partial x^2} = \sigma\mu\mu_0\frac{\partial E_y}{\partial t}
+    \label{eq:diffusion_chastni}
+\end{align}
+Если $E_y(0,t)=E_0 e^{i\omega t}$ то решением \eqref{eq:diffusion_chastni} будет функция вида
+\begin{align}
+    E_y(x,t)=E_0 e^{-x/\delta} e^{i(\omega t - x/\delta)}
+    \label{eq:skin_effect_poluprostranstvo}
+\end{align}
+где
+\begin{align}
+    \delta = \sqrt{\frac{2}{\omega\sigma\mu\mu_0}}
+    \label{eq:delta}
+\end{align}
+
+ 
+\subsection{Скин-эффект в тонокм полом цилиндре}
+\vspace{1cm}
+\begin{wrapfigure}[36]{l}{0.3\textwidth}
+  \begin{center}
+    \includegraphics[width=0.28\textwidth]{cilindr}
+  \end{center}
+  \caption{Эл-магнитные поля в цилиндре}\label{fig:cilindr}
+
+  \begin{center}
+    \includegraphics[width=0.28\textwidth]{stenka}
+  \end{center}
+  \caption{Стенка цилиндра}\label{fig:stenka}
+\end{wrapfigure}
+
+Перейдем теперь к описанию теории в нашей работе. Из соображении симметрии и 
+непрерывности соответствующих компонет векторов $\vb*{E}$ и $\vb*{H}$ можем сказать что
+\begin{align}
+    H_z = H(r)e^{i\omega t} \text{, } E_\varphi = E(r)e^{i\omega t}
+\end{align}
+и при этом функции $H(r)$ и $E(r)$ непрерывны.
+
+Внутри цилиндра токов нет, следовательно $H(r)=H_1=\text{const}$ внутри цилиндра.
+По теореме об электромагнитной индукции
+\begin{align}
+    E(r) = -\frac{1}{2}\mu_0 r \cdot i \omega H_1
+\end{align}
+откуда мы получаем граничное условие
+\begin{align}
+    E_1=E(a)= -\frac{1}{2}\mu_0 a \cdot i \omega H_1
+    \label{eq:granichnoe_uslovie_E}
+\end{align}
+
+В прближении $h \ll a$ можем пренебречь кривизной стенки и смоделировать 
+его бесконечной полосой. Тогда, надо решить уравнение \eqref{eq:laplacian_H}
+с граничными условиями. Решая уравнение получим связь полей $H_1$ 
+(поле внутри цилиндра которое мы будем измерять) и $H_2$, которое колебается с частотой
+$\omega$
+
+\begin{align}
+    H_1 = \frac{H_0}{\ch(\alpha h) + \frac{1}{2} \alpha a \sh(\alpha h)} 
+    \text{\ \ \ }
+    \alpha = \sqrt{i\omega \sigma \mu_0} = \frac{\sqrt{2}}{\delta}e^{i\pi/4}
+    \label{eq:svyaz_poley}
+\end{align}
+
+из этой формулы получим сколько по фазе отстает поле $H_1$ от $H_0$. При $\delta \ll h$
+(высокачастотная область)
+
+\begin{align}
+    \psi \approx \frac{\pi}{4} + \frac{h}{\delta} = 
+    \frac{\pi}{4} + h \sqrt{\frac{\omega \sigma \mu_0}{2}}
+    \label{eq:faza_high_freq}
+\end{align}
+
+При $\delta \gg h$ (низкочастотная область)
+
+\begin{align}
+    \tan \psi \approx \frac{ah}{\delta^2} = \pi a h \sigma \mu \mu_0 \nu
+    \label{eq:faza_low_freq}
+\end{align}
+ 
+
+\subsection{Процесс измерения}
+\begin{wrapfigure}{l}{0.5\textwidth}
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{ustanovka}
+  \end{center}
+  \caption{Установка}\label{fig:ustanovka}
+\end{wrapfigure}
+
+Мангнитное поле внутри цилиндра измеряется катушкой 3. Напряжение на катушке
+пропорционалньна производной $\dot{B_1}(t)$
+\begin{align}
+    U(t) \propto \dot{B_1}(t) = -i\omega H_1 e^{i\omega t}
+\end{align}
+Поле внутри цилиндра пропорциональна току через соленоид
+\begin{align}
+    B_0(t) \propto I(t)
+\end{align}
+Отсюда несложно увидеть, что
+\begin{align}
+    \frac{\abs{H_1}}{\abs{H_0}} = \xi_0^{-1} \cdot \frac{U}{\nu I} = \xi \xi_0
+    \label{eq:otnoshenie_amplitud}
+\end{align}
+\vspace{0.3cm}
+
+где константу можно определить из условия $\abs{H_1}/\abs{H_2} \rightarrow 1$ при
+$\nu \rightarrow 0$.
+
+\vspace{0.3cm}
+
+При измерениях разности фаз нужно учесть, что первый сигнал на осциллографе
+пропорционален магнитному полю снаружи, а второй пропорционален производному
+поля внутри цилиндра по времени. Вследствии этого набегает дополнительная фаза $\pi/2$,
+которую надо вычесть при измерениях.
+
+ 
+\section{Ход работы}
+
+Параметры нашей установки $2a = 45$ мм, $h=1.5$ мм. Проводимость порядка
+$\sigma \sim 5\cdot 10^7$ См/м. Получаем оценку для частоты, при которой
+глубина проникновения равна толщине стенок цилиндра $\nu_h = $2250 Гц.
+
+\subsection{Измерение проводимости через отношение амплитуд}
+В области частот $\nu \ll \nu_h$ $\alpha h \ll 1$, и из \eqref{eq:svyaz_poley} получаем
+\begin{align}
+    {(\xi/\xi_0)}^2 \approx \frac{1}{1+A^2\nu^2} && A=\pi a h \sigma \mu_0
+\end{align}
+или, эквивалентно
+\begin{align}
+    \frac{1}{\xi^2}=B^2\nu^2 + 1/\xi_0^2 && B=\pi a h \sigma \mu_0 /\xi_0
+    \label{eq:liniya_dlya_c}
+\end{align}
+
+\begin{figure}[H]
+    \center{\includegraphics[width=\textwidth]{xi_nu_low_freq_linearized}}
+    \caption{График зависимости $1/\xi^2(\nu)$}\label{fig:xi_nu_low_freq_linearized}
+     
+\end{figure}
+
+Из графика получаем значение $\nu_0$, а так же проводимость меди $\sigma$
+\begin{align}
+    \xi_0=(0.014533 \pm 0.000006) ~ (\text{В/А/Гц})^2 && \sigma = (4.432 \pm 0.002) \cdot 10^7 ~ \text{См/м}
+\end{align}
+
+ 
+
+\subsection{Измерение проводимости через разность фаз в низкочастотном диапазоне}
+Согласно формуле \eqref{eq:faza_low_freq}, при $\delta \gg h$
+\begin{align}
+    \tan \psi = k \nu \ \text{; } k = \pi a h \sigma \mu_0 \ \ (\mu = 1)
+\end{align}
+
+\begin{figure}[H]
+    \center{\includegraphics[width=\textwidth]{tg_psi_nu_line}}
+    \caption{График зависимости $\tan \psi (\nu)$ }\label{fig:tg_psi_nu_line}
+     
+\end{figure}
+
+\vspace{1cm}
+Из коэффициента наклона прямой находим проводимость
+\begin{align}
+    \sigma = (4.5 \pm 1.2) \cdot 10^7 \text{См/м}
+\end{align}
+
+ 
+
+\begin{figure}[H]
+    \center{\includegraphics[width=\textwidth]{tg_psi_nu_no_line}}
+    \caption{График зависимости $\tan \psi (\nu)$ (нелинейная часть)}\label{fig:tg_psi_nu_no_line}
+     
+\end{figure}
+
+\subsection{Измерение проводимости через разность фаз в высокачастотном диапазоне}
+Согласно формуле \eqref{eq:faza_high_freq}, при $\delta \ll h$
+\begin{align}
+    \psi - \pi/4 = k\cdot \sqrt{\nu}; \ k = h\sqrt{\pi\mu_0\sigma}
+\end{align}
+
+Из графика получаем следующее значение проводимости
+
+\begin{align}
+    \sigma = (4.6 \pm 0.6) \cdot 10^7 \text{См/м}
+\end{align}
+
+ 
+
+\begin{figure}[H]
+    \center{\includegraphics[width=0.9\textwidth]{psi_sqrt_nu}}
+    \caption{График зависимости $(\psi - \pi/4)(\sqrt{\nu})$}\label{fig:psi_sqrt_nu}
+     
+\end{figure}
+
+\subsection{Измерение проводимости через изменение индуктивности}
+
+Из за наличия цилиндра внутри, индуктивность внешней катушки зависит от катушки
+следующим образом
+
+\begin{align}
+    \frac{L_{\max} - L}{L - L_{\min}} = \pi ^2 a^2 h^2 {\mu_0}^2 \sigma^2 \nu^2
+\end{align}
+
+\begin{figure}[H]
+    \center{\includegraphics[width=\textwidth]{L_nu}}
+    \caption{График зависимости $\frac{L_{\max} - L}{L - L_{\min}} (\nu^2)$}\label{fig:L_nu}
+     
+\end{figure}
+
+ 
+
+\begin{figure}[H]
+    \center{\includegraphics[width=\textwidth]{L_nu_linearized}}
+    \caption{График зависимости $\frac{L_{\max} - L}{L - L_{\min}} (\nu^2)$}\label{fig:L_nu_linearized}
+     
+\end{figure}
+
+\vspace{1cm}
+$L_{\max}$ и $L_{\min}$ ищем в области монотонности. Далее, линеаризуя данные по формуле
+выше получаем линейную зависимость при малых $\nu$. По наклону кривой находим
+
+\begin{align}
+    \sigma = (4.240 \pm 0.007) \cdot 10^7 ~\text{См/м}
+\end{align}
+
+ 
+
+\subsection{Отношение магнитных полей}
+Отношение $\abs{H_1}/\abs{H_0}$ можем посчитать двумя способами. Первый способ - через
+формулу \eqref{eq:otnoshenie_amplitud},использовав значение $\xi_0$ из пункта (2.1).
+Второй способ - через теоретическую формулу \eqref{eq:svyaz_poley}, использовав значение
+$\sigma$ из пункта (2.1). Посмотрим на их различие с помощью графиков зависимости
+$\abs{H_1}/\abs{H_0} (\nu)$
+
+\begin{figure}[H]
+    \center{\includegraphics[width=\textwidth]{all_freq_ratio}}
+    \caption{Отношение полей}\label{fig:all_freq_ratio}
+     
+\end{figure}
+
+Как можно видеть ошибка теоретической модели достаточно небольшая. Предлагаемая модель описывает зависимость во всем рассмотренном диапазоне, что позволяет сделать вывод о ее корректности.
+\section{Вывод}
+Мы измерили проводимость материала цилиндра 4 разными способами. Сравним эти данные
+между собой
+
+\begin{table}[!h]
+\begin{center}
+\begin{tabular}{|l|r|r|r|}
+\hline
+Метод измерения & $\sigma, 10^{7} \text{См/м}$ & $\Delta\sigma, 10^{7} \text{См/м}$ & $\varepsilon_{\sigma}$\\
+\hline
+
+Отношение амплитуд & 4.432 & 0.002 & 0.05\%\\
+\hline
+
+Разности фаз (низкие частоты) & 4.5 & 26 & \%\\
+\hline
+
+Разности фаз (высокие частоты) & 4.6 & 0.6 & 13\%\\
+\hline
+
+Индуктивность & 4.240 & 0.007 & 0.17\%\\
+\hline
+
+
+\end{tabular}
+\end{center}
+    \caption{Сравнение результатов различных методов}\label{}
+\end{table}
+
+Для меди проводимость состовляет $\sigma_{обыч} = (5.55-5.80)\cdot10^{7}$ См/м.
+Учитывая высокую точность измерения первым методом, значения очевидно не совпадают. У этого может быть две причины: пренебрежение краевыми эффектами или неидеальность меди трубы (различные примеси и вкрапление, неидеальная структура из-за способа изготовления). Второе, как мне кажется, вероятнее. 
+
+	Измерение через сдвиг фазы на низкой частоте получились очень неточным. Это произошло из-за большой погрешности тангенса (т.к. тета это разница двух близких величин) и небольшого количества точек в линейной области
+	
+	Измерения через сдвиг на высоких частотах получились лучше, но погрешность все еще выше чем в первом методе.
+	
+	Измерения через индуктивность получились достаточно точными. Нелинейная часть присутствует по той причине, что при почти нулевом проникании поля в трубу основной вклад вносит поле в теле трубы, которое мы не учитываем.
+	Результат не совпал с первым пунктом. Это может быть связано с ошибкой измерительного прибора (во время измерений на некоторых частотах его показания были абсурдны, поэтому доверия он не вызывает) или неучтенным полем в теле проводника
+	
+	Как уже было сказано в п 3.5, предложенная зависимость описывает явление в рассматриваемом диапазоне
+
+\end{document}

@@ -43,6 +43,7 @@ def plot1(x_exp, y_exp, x_name, y_name, legend, x_err_formula_index=0, y_err_for
     plt.grid(True)
     plt.legend(loc='best', fontsize=12)
     plt.show()
+    return error_of_exp(x_exp, y_exp)
 
 
 def plot_3_on_1(x_exp1, y_exp1, x_name1, y_name1, legend1, x_err_formula_index1, y_err_formula_index1,
